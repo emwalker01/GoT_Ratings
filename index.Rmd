@@ -22,7 +22,7 @@ Write something about where I got the data from.
 
 ### Load Packages
 
-```{r loading libraries, echo=TRUE, message=FALSE}
+```{r loadlib, echo=TRUE, warning=FALSE, message=FALSE}
 
 library(tidyverse)
 library(here)
