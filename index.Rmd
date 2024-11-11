@@ -34,10 +34,11 @@ library(knitr)
 
 ```{r import}
 #load data from excel file
-rawdata <- read_excel(here::here("raw_data", "raw_data.xlsx"), col_names=TRUE)
+rawdata <- read_excel(here::here("raw_data", "raw_data.xlsx"))
 
-#this is a sanity check to inspect the data
+#this is a sanity check to inspect the data after new name assignment
 print(rawdata)
+
 
 #reassigning column names to remain empty after automatic assignment of "...1"
 colnames(rawdata) <- ifelse(colnames(rawdata) == "...1", "", colnames(rawdata))

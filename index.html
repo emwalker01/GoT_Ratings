@@ -378,10 +378,10 @@ library(knitr)</code></pre>
 <div id="import-the-data" class="section level3">
 <h3>Import the Data</h3>
 <pre class="r"><code>#load data from excel file
-rawdata &lt;- read_excel(here::here(&quot;raw_data&quot;, &quot;raw_data.xlsx&quot;), col_names=TRUE)</code></pre>
+rawdata &lt;- read_excel(here::here(&quot;raw_data&quot;, &quot;raw_data.xlsx&quot;))</code></pre>
 <pre><code>## New names:
 ## • `` -&gt; `...1`</code></pre>
-<pre class="r"><code>#this is a sanity check to inspect the data
+<pre class="r"><code>#this is a sanity check to inspect the data after new name assignment
 print(rawdata)</code></pre>
 <pre><code>## # A tibble: 8 × 12
 ##   ...1     e1    e2    e3    e4    e5    e6    e7    e8    e9   e10   e11
