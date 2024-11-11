@@ -17,3 +17,19 @@ knitr::opts_chunk$set(echo = TRUE)
 </center>
 ## Background and Research Question
 
+## Data
+Write something about where I got the data from.
+
+### Load Packages
+
+```{r loading libraries, echo=TRUE, message=FALSE}
+
+library(tidyverse)
+library(here)
+```
+
+### Import the Data
+
+### Wrangle the Data
+
+
