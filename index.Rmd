@@ -26,9 +26,18 @@ Write something about where I got the data from.
 
 library(tidyverse)
 library(here)
+library(readxl)
+library(knitr)
 ```
 
 ### Import the Data
+
+```{r import}
+
+rawdata <- read_excel(here::here("raw_data", "raw_data.xlsx"))
+kable(rawdata, format = "markdown")
+
+```
 
 ### Wrangle the Data
 

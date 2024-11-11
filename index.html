@@ -371,10 +371,148 @@ display: none;
 <div id="load-packages" class="section level3">
 <h3>Load Packages</h3>
 <pre class="r"><code>library(tidyverse)
-library(here)</code></pre>
+library(here)
+library(readxl)
+library(knitr)</code></pre>
 </div>
 <div id="import-the-data" class="section level3">
 <h3>Import the Data</h3>
+<pre class="r"><code>rawdata &lt;- read_excel(here::here(&quot;raw_data&quot;, &quot;raw_data.xlsx&quot;))</code></pre>
+<pre><code>## New names:
+## • `` -&gt; `...1`</code></pre>
+<pre class="r"><code>kable(rawdata, format = &quot;markdown&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">…1</th>
+<th align="right">e1</th>
+<th align="right">e2</th>
+<th align="right">e3</th>
+<th align="right">e4</th>
+<th align="right">e5</th>
+<th align="right">e6</th>
+<th align="right">e7</th>
+<th align="right">e8</th>
+<th align="right">e9</th>
+<th align="right">e10</th>
+<th align="right">e11</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">s1</td>
+<td align="right">8.9</td>
+<td align="right">8.6</td>
+<td align="right">8.5</td>
+<td align="right">8.6</td>
+<td align="right">9.0</td>
+<td align="right">9.1</td>
+<td align="right">9.1</td>
+<td align="right">8.9</td>
+<td align="right">9.6</td>
+<td align="right">9.4</td>
+<td align="right">9.2</td>
+</tr>
+<tr class="even">
+<td align="left">s2</td>
+<td align="right">8.6</td>
+<td align="right">8.3</td>
+<td align="right">8.7</td>
+<td align="right">8.6</td>
+<td align="right">8.6</td>
+<td align="right">8.9</td>
+<td align="right">8.8</td>
+<td align="right">8.6</td>
+<td align="right">9.7</td>
+<td align="right">9.3</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">s3</td>
+<td align="right">8.6</td>
+<td align="right">8.4</td>
+<td align="right">8.7</td>
+<td align="right">9.5</td>
+<td align="right">8.9</td>
+<td align="right">8.7</td>
+<td align="right">8.6</td>
+<td align="right">8.9</td>
+<td align="right">9.9</td>
+<td align="right">9.1</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">s4</td>
+<td align="right">9.0</td>
+<td align="right">9.7</td>
+<td align="right">8.7</td>
+<td align="right">8.7</td>
+<td align="right">8.6</td>
+<td align="right">9.7</td>
+<td align="right">9.0</td>
+<td align="right">9.7</td>
+<td align="right">9.6</td>
+<td align="right">9.7</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">s5</td>
+<td align="right">8.3</td>
+<td align="right">8.3</td>
+<td align="right">8.3</td>
+<td align="right">8.5</td>
+<td align="right">8.5</td>
+<td align="right">7.9</td>
+<td align="right">8.8</td>
+<td align="right">9.8</td>
+<td align="right">9.4</td>
+<td align="right">9.1</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">s6</td>
+<td align="right">8.4</td>
+<td align="right">9.2</td>
+<td align="right">8.6</td>
+<td align="right">9.0</td>
+<td align="right">9.7</td>
+<td align="right">8.3</td>
+<td align="right">8.5</td>
+<td align="right">8.3</td>
+<td align="right">9.9</td>
+<td align="right">9.9</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">s7</td>
+<td align="right">8.5</td>
+<td align="right">8.8</td>
+<td align="right">9.1</td>
+<td align="right">9.7</td>
+<td align="right">8.7</td>
+<td align="right">9.0</td>
+<td align="right">9.4</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">s8</td>
+<td align="right">7.6</td>
+<td align="right">7.9</td>
+<td align="right">7.5</td>
+<td align="right">5.5</td>
+<td align="right">5.9</td>
+<td align="right">4.0</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="wrangle-the-data" class="section level3">
 <h3>Wrangle the Data</h3>
