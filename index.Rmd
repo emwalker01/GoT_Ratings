@@ -1,5 +1,5 @@
 ---
-title: "Game of Thrones Rating per Episode"
+title: "PSY6422 Project"
 author: "Emma Walker"
 date: "2024-11-11"
 output: html_document
@@ -8,4 +8,12 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+<center>
+![](images/Logo_Game_of_thrones.png)
+
+# **Game of Thrones Ratings Per Episode**
+
+</center>
+## Background and Research Question
 
