@@ -377,14 +377,32 @@ library(knitr)</code></pre>
 </div>
 <div id="import-the-data" class="section level3">
 <h3>Import the Data</h3>
-<pre class="r"><code>rawdata &lt;- read_excel(here::here(&quot;raw_data&quot;, &quot;raw_data.xlsx&quot;))</code></pre>
+<pre class="r"><code>#load data from excel file
+rawdata &lt;- read_excel(here::here(&quot;raw_data&quot;, &quot;raw_data.xlsx&quot;), col_names=TRUE)</code></pre>
 <pre><code>## New names:
 ## • `` -&gt; `...1`</code></pre>
-<pre class="r"><code>kable(rawdata, format = &quot;markdown&quot;)</code></pre>
+<pre class="r"><code>#this is a sanity check to inspect the data
+print(rawdata)</code></pre>
+<pre><code>## # A tibble: 8 × 12
+##   ...1     e1    e2    e3    e4    e5    e6    e7    e8    e9   e10   e11
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 s1      8.9   8.6   8.5   8.6   9     9.1   9.1   8.9   9.6   9.4   9.2
+## 2 s2      8.6   8.3   8.7   8.6   8.6   8.9   8.8   8.6   9.7   9.3  NA  
+## 3 s3      8.6   8.4   8.7   9.5   8.9   8.7   8.6   8.9   9.9   9.1  NA  
+## 4 s4      9     9.7   8.7   8.7   8.6   9.7   9     9.7   9.6   9.7  NA  
+## 5 s5      8.3   8.3   8.3   8.5   8.5   7.9   8.8   9.8   9.4   9.1  NA  
+## 6 s6      8.4   9.2   8.6   9     9.7   8.3   8.5   8.3   9.9   9.9  NA  
+## 7 s7      8.5   8.8   9.1   9.7   8.7   9     9.4  NA    NA    NA    NA  
+## 8 s8      7.6   7.9   7.5   5.5   5.9   4    NA    NA    NA    NA    NA</code></pre>
+<pre class="r"><code>#reassigning column names to remain empty after automatic assignment of &quot;...1&quot;
+colnames(rawdata) &lt;- ifelse(colnames(rawdata) == &quot;...1&quot;, &quot;&quot;, colnames(rawdata))
+
+#render the table with kable
+kable(rawdata, format = &quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">…1</th>
+<th align="left"></th>
 <th align="right">e1</th>
 <th align="right">e2</th>
 <th align="right">e3</th>
