@@ -71,8 +71,13 @@ rawdata_long <- rawdata %>%
                names_to = "Episode",           # Create a new column "Episode"
                values_to = "Rating")          # Create a new column "Rating"
 
+
+# Exclude Episode 11 from the data
+rawdata_long_filtered <- rawdata_long %>%
+  filter(str_replace(Episode, "Episode ", "") != "11")
+
 #Create a line plot
-ggplot(rawdata_long, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # Convert episode to numeric
+ggplot(rawdata_long_filtered, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # Convert episode to numeric
                          y = Rating, 
                          color = factor(Season))) +  # Use Season for different lines
   geom_line() +                        # Draw lines
