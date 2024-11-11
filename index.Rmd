@@ -28,6 +28,8 @@ library(tidyverse)
 library(here)
 library(readxl)
 library(knitr)
+library(dplyr)
+library(kableExtra)
 ```
 
 ### Import the Data
@@ -36,18 +38,54 @@ library(knitr)
 #load data from excel file
 rawdata <- read_excel(here::here("raw_data", "raw_data.xlsx"))
 
-#this is a sanity check to inspect the data after new name assignment
+#this is a sanity check to inspect the data
 print(rawdata)
-
-
-#reassigning column names to remain empty after automatic assignment of "...1"
-colnames(rawdata) <- ifelse(colnames(rawdata) == "...1", "", colnames(rawdata))
-
-#render the table with kable
-kable(rawdata, format = "markdown")
 
 ```
 
 ### Wrangle the Data
+
+```{r wrangle, echo=TRUE, warning=FALSE, message=FALSE}
+#rename the first column after automatic assignment of "...1"
+colnames(rawdata) <- ifelse(colnames(rawdata) == "...1", "Season", colnames(rawdata))
+
+#rename the columns, excluding the first, empty column
+colnames(rawdata)[-1] <- c("Episode 1", "Episode 2", "Episode 3", "Episode 4", "Episode 5", "Episode 6", "Episode 7", "Episode 8", "Episode 9", "Episode 10", "Episode 11")
+
+#this is a sanity to check to make sure the column headers changed
+head(rawdata)
+
+#change the values in the first column
+rawdata$Season <- sub("s", "", rawdata$Season)
+
+#render the table with kable
+kable(rawdata, format = "markdown")
+ 
+```
+
+
+```{r visualisation, echo=TRUE, warning=FALSE, message=FALSE}
+# Reshape the data to long format for a more flexible structure for visualizing, analyzing, and modeling data. Easier for ggplot2 to handle.
+rawdata_long <- rawdata %>%
+  pivot_longer(cols = starts_with("Episode"),  # Select columns that start with "Episode"
+               names_to = "Episode",           # Create a new column "Episode"
+               values_to = "Rating")          # Create a new column "Rating"
+
+#Create a line plot
+ggplot(rawdata_long, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # Convert episode to numeric
+                         y = Rating, 
+                         color = factor(Season))) +  # Use Season for different lines
+  geom_line() +                        # Draw lines
+  geom_point() +                       # Add points for each episode
+  labs(x = "Episode Number",            # Label for x-axis
+       y = "Episode Rating",            # Label for y-axis
+       color = "Season Number") +       # Label for the legend
+  theme_minimal() +                    # Use a minimal theme for a clean look
+  scale_color_viridis_d() +             # Add color scale for different lines
+  theme(legend.position = "right")      # Place the legend at the bottom
+ 
+```
+
+
 
 
