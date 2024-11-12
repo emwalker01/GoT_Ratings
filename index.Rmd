@@ -30,6 +30,8 @@ library(readxl) #to read excel files in R
 library(knitr) #runs the R code and inserts the results back into the document
 library(dplyr) #for data manipulation tasks
 library(ggimage) #to add images to the legend
+library(stringr) #
+library(jpeg)
 ```
 
 ### Import the Data
@@ -103,35 +105,52 @@ p <- ggplot(data, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # C
 print(p)
 
 ```
-```{r customised visualisation, echo=TRUE, warning=FALSE, message=FALSE}
+```{r customised visualisation, echo=TRUE, message=FALSE, warning=FALSE}
 # Preprocess the Episode column to extract numeric episode numbers. It removes the "Episode " part of the string and converts the remaining number (e.g., "1", "2") into an integer; creating a new column 'EpisodeNumber'
 data1 <- data %>%
   mutate(EpisodeNumber = as.integer(str_replace(Episode, "Episode ", "")))
 
-#this is a sanity check to view the new column
+# This is a sanity check to view the new column
 print(data1)
 
-# Create the plot
-p1 <- ggplot(data1, aes(x = EpisodeNumber,  # Use preprocessed EpisodeNumber
-                      y = Rating, 
-                      color = factor(Season))) +  
+# Convert the numeric 'Season' column to a factor with appropriate labels
+data1$Season <- factor(data1$Season, 
+                       levels = 1:8, 
+                       labels = c("Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8"))
+
+# Assign custom colors to each line based on the season
+custom_colors <- c(
+  "Season 1" = "#7f7f7f",   # Grey for Season 1, House Stark
+  "Season 2" = "#ffc406",   # Yellow for Season 2, House Baratheon
+  "Season 3" = "darkgreen",   # Green for Season 3, House Tyrell
+  "Season 4" = "#ED7014",   # Orange for Season 4, House Martel
+  "Season 5" = "maroon",   # Maroon for Season 5, House Lannister
+  "Season 6" = "#023E8A",   # Blue for Season 6, House Arryn
+  "Season 7" = "#000000",   # Black for Season 7, House Greyjoy
+  "Season 8" = "#ff0000"    # Red for Season 8, House Targaryen
+)
+
+# Create the plot with custom colors for each season
+p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) +  
   geom_line() +                        
   geom_point() +                       
   labs(x = "Episode Number",            
        y = "Episode Rating",            
-       color = "Season Number") +       
-  theme_minimal() +                    # Use a minimal theme for a clean look
-  scale_color_viridis_d() +             # Add color scale for different lines
-  scale_x_continuous(breaks = seq(1, max(data1$EpisodeNumber), by = 1)) +  # Set x-axis breaks to 1
-   scale_y_continuous(
-   breaks = seq(4, 10, by = 0.5),  # Set y-axis breaks from 4 to 10.5 in steps of 0.5
-    limits = c(4, 10),              # Set y-axis limits to go from 4 to 10.5
-    expand = c(0, 0)                  # Remove extra padding around the axis
+       color = "Season") +  # Label for the legend
+  theme_minimal() +  # Clean, minimal theme
+  scale_color_manual(values = custom_colors) +  # Apply custom colors for lines
+  scale_x_continuous(breaks = seq(1, max(data1$EpisodeNumber), by = 1)) +  # Set x-axis breaks
+  scale_y_continuous(
+    breaks = seq(4, 10, by = 0.5),  # Set y-axis breaks
+    limits = c(4, 10),              # Set y-axis limits
+    expand = c(0, 0)                # Remove extra padding
   ) + 
-  theme(legend.position = "right")      
+  theme(legend.position = "right")  # Position the legend on the right
 
 # Display the plot
 print(p1)
+
+
 ```
 
 
