@@ -12,24 +12,24 @@ knitr::opts_chunk$set(echo = TRUE)
 <center>
 ![](images/Logo_Game_of_thrones.png)
 
-# **Game of Thrones Ratings Per Episode**
+# **Game of Thrones Ratings Per Episode Per Season**
 
 </center>
-## Background and Research Question
+## **Background and Research Question**
 
-## Data
+## **Data**
 Write something about where I got the data from.
 
 ### Load Packages
 
 ```{r loadlib, echo=TRUE, warning=FALSE, message=FALSE}
 
-library(tidyverse)
-library(here)
-library(readxl)
-library(knitr)
-library(dplyr)
-library(kableExtra)
+library(tidyverse) #for data manipulation, visualization, and analysis
+library(here) #simplifies paths
+library(readxl) #to read excel files in R
+library(knitr) #runs the R code and inserts the results back into the document
+library(dplyr) #for data manipulation tasks
+library(ggimage) #to add images to the legend
 ```
 
 ### Import the Data
@@ -56,28 +56,38 @@ colnames(rawdata)[-1] <- c("Episode 1", "Episode 2", "Episode 3", "Episode 4", "
 head(rawdata)
 
 #change the values in the first column
-rawdata$Season <- sub("s", "", rawdata$Season)
+rawdata$Season <- sub("s", "", rawdata$Season) #removing the 's' just to clean up to view of the table.
 
 #render the table with kable
 kable(rawdata, format = "markdown")
  
 ```
 
+Write something here about why episode 11 is being excluded. i.e. episode 11 on IMDB is in the data but it was an unaired pilot episode.
 
-```{r visualisation, echo=TRUE, warning=FALSE, message=FALSE}
-# Reshape the data to long format for a more flexible structure for visualizing, analyzing, and modeling data. Easier for ggplot2 to handle.
+```{r cleaning}
+# Reshape the data to long format for a more flexible structure for visualizing, analyzing, and modeling data. This is easier for ggplot2 to handle.
 rawdata_long <- rawdata %>%
   pivot_longer(cols = starts_with("Episode"),  # Select columns that start with "Episode"
                names_to = "Episode",           # Create a new column "Episode"
                values_to = "Rating")          # Create a new column "Rating"
 
-
 # Exclude Episode 11 from the data
-rawdata_long_filtered <- rawdata_long %>%
+data <- rawdata_long %>%
   filter(str_replace(Episode, "Episode ", "") != "11")
 
-#Create a line plot
-ggplot(rawdata_long_filtered, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # Convert episode to numeric
+#this is a sanity check to make sure the data is now in a long format
+head(data)
+
+# Save the data as a CSV file, which can be opened in excel.
+write.csv(data, "data.csv", row.names = FALSE)
+```
+
+## **Visualisation**
+
+```{r basic visualisation, echo=TRUE, warning=FALSE, message=FALSE}
+#Create a basic line plot with minimal customisation
+p <- ggplot(data, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # Convert episode to numeric
                          y = Rating, 
                          color = factor(Season))) +  # Use Season for different lines
   geom_line() +                        # Draw lines
@@ -87,9 +97,47 @@ ggplot(rawdata_long_filtered, aes(x = as.integer(str_replace(Episode, "Episode "
        color = "Season Number") +       # Label for the legend
   theme_minimal() +                    # Use a minimal theme for a clean look
   scale_color_viridis_d() +             # Add color scale for different lines
-  theme(legend.position = "right")      # Place the legend at the bottom
- 
+  theme(legend.position = "right")      # Place the legend at the right
+
+#view the plot as a sanity check to assess what direction to take the customisations.
+print(p)
+
 ```
+```{r customised visualisation, echo=TRUE, warning=FALSE, message=FALSE}
+# Preprocess the Episode column to extract numeric episode numbers. It removes the "Episode " part of the string and converts the remaining number (e.g., "1", "2") into an integer; creating a new column 'EpisodeNumber'
+data1 <- data %>%
+  mutate(EpisodeNumber = as.integer(str_replace(Episode, "Episode ", "")))
+
+#this is a sanity check to view the new column
+print(data1)
+
+# Create the plot
+p1 <- ggplot(data1, aes(x = EpisodeNumber,  # Use preprocessed EpisodeNumber
+                      y = Rating, 
+                      color = factor(Season))) +  
+  geom_line() +                        
+  geom_point() +                       
+  labs(x = "Episode Number",            
+       y = "Episode Rating",            
+       color = "Season Number") +       
+  theme_minimal() +                    # Use a minimal theme for a clean look
+  scale_color_viridis_d() +             # Add color scale for different lines
+  scale_x_continuous(breaks = seq(1, max(data1$EpisodeNumber), by = 1)) +  # Set x-axis breaks to 1
+   scale_y_continuous(
+   breaks = seq(4, 10, by = 0.5),  # Set y-axis breaks from 4 to 10.5 in steps of 0.5
+    limits = c(4, 10),              # Set y-axis limits to go from 4 to 10.5
+    expand = c(0, 0)                  # Remove extra padding around the axis
+  ) + 
+  theme(legend.position = "right")      
+
+# Display the plot
+print(p1)
+```
+
+
+
+
+
 
 
 
