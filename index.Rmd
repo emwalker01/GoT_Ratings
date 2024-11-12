@@ -31,7 +31,7 @@ library(knitr) #runs the R code and inserts the results back into the document
 library(dplyr) #for data manipulation tasks
 library(ggimage) #to add images to the legend
 library(stringr) #
-library(jpeg)
+library(jpeg) #to read jpeg files
 ```
 
 ### Import the Data
@@ -42,7 +42,6 @@ rawdata <- read_excel(here::here("raw_data", "raw_data.xlsx"))
 
 #this is a sanity check to inspect the data
 print(rawdata)
-
 ```
 
 ### Wrangle the Data
@@ -62,7 +61,6 @@ rawdata$Season <- sub("s", "", rawdata$Season) #removing the 's' just to clean u
 
 #render the table with kable
 kable(rawdata, format = "markdown")
- 
 ```
 
 Write something here about why episode 11 is being excluded. i.e. episode 11 on IMDB is in the data but it was an unaired pilot episode.
@@ -103,20 +101,29 @@ p <- ggplot(data, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # C
 
 #view the plot as a sanity check to assess what direction to take the customisations.
 print(p)
-
 ```
-```{r customised visualisation, echo=TRUE, message=FALSE, warning=FALSE}
+
+Write something here about recoding the episode column to be able to change the scale
+
+```{r scale}
 # Preprocess the Episode column to extract numeric episode numbers. It removes the "Episode " part of the string and converts the remaining number (e.g., "1", "2") into an integer; creating a new column 'EpisodeNumber'
 data1 <- data %>%
   mutate(EpisodeNumber = as.integer(str_replace(Episode, "Episode ", "")))
 
 # This is a sanity check to view the new column
 print(data1)
+```
 
+can write something here about customising the colours
+
+```{r line colours}
 # Convert the numeric 'Season' column to a factor with appropriate labels
 data1$Season <- factor(data1$Season, 
                        levels = 1:8, 
                        labels = c("Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8"))
+
+#this is a sanity check to view the column change
+print(data1)
 
 # Assign custom colors to each line based on the season
 custom_colors <- c(
@@ -129,8 +136,11 @@ custom_colors <- c(
   "Season 7" = "#000000",   # Black for Season 7, House Greyjoy
   "Season 8" = "#ff0000"    # Red for Season 8, House Targaryen
 )
+```
 
-# Create the plot with custom colors for each season
+
+```{r customised visualisation, echo=TRUE, message=FALSE, warning=FALSE}
+# Create the plot with new customisations
 p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) +  
   geom_line() +                        
   geom_point() +                       
@@ -149,12 +159,7 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 
 # Display the plot
 print(p1)
-
-
 ```
-
-
-
 
 
 
