@@ -1,0 +1,6 @@
+"0","# Preprocess the Episode column to extract numeric episode numbers. It removes the ""Episode "" part of the string and converts the remaining number (e.g., ""1"", ""2"") into an integer; creating a new column 'EpisodeNumber'"
+"0","data1 <- data %>%"
+"0","  mutate(EpisodeNumber = as.integer(str_replace(Episode, ""Episode "", """")))"
+"0",""
+"0","# This is a sanity check to view the new column"
+"0","print(data1)"

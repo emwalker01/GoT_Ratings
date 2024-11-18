@@ -30,9 +30,8 @@ library(readxl) #to read excel files in R
 library(knitr) #runs the R code and inserts the results back into the document
 library(dplyr) #for data manipulation tasks
 library(ggimage) #to add images to the legend
-library(stringr) #
 library(jpeg) #to read jpeg files
-library(grid)
+library(gganimate)
 ```
 
 ### Import the Data
@@ -168,6 +167,7 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
   labs(x = "Episode Number",            
        y = "Episode Rating",            
        color = "") +  # Label for the legend
+  ggtitle("Game of Thrones Episode Ratings Per Season") + # Add a title
   theme_minimal() +  # Clean, minimal theme
   scale_color_manual(values = custom_colors) +  # Apply custom colors for lines
   scale_x_continuous(breaks = seq(1, max(data1$EpisodeNumber), by = 1)) +  # Set x-axis breaks
@@ -176,7 +176,12 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
     limits = c(4, 10),              # Set y-axis limits
     expand = c(0, 0)                # Remove extra padding
   ) + 
-  theme(legend.position = "right")  # Position the legend on the right
+  theme(legend.position = "right") +  # Position the legend on the right
+  guides(color = guide_legend(
+    keywidth = 2,  # Adjust the size of the legend key (box around the color circle)
+    keyheight = 2, # Adjust the size of the legend key (box around the color circle)
+    override.aes = list(size = 5)  # Increase the size of the color circles inside the legend
+  ))
 
 # Display the plot
 print(p1)
