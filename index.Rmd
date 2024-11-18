@@ -17,8 +17,16 @@ knitr::opts_chunk$set(echo = TRUE)
 </center>
 ## **Background and Research Question**
 
+**"How have the ratings of Game of Thrones episodes evolved over time across different seasons?"**
+
+This research question will aim to explore trends in the data such as whether ratings increased or decreased over the course of the show, or whether there were any significant drops after key plot developments, for example.
+
 ## **Data**
-Write something about where I got the data from.
+The raw data was obtained from the IMDB website which is publicly accessible via this link:
+
+https://www.imdb.com/title/tt0944947/ratings/
+
+The data used in this analysis was extracted from the 'Ratings by episode' section.
 
 ### Load Packages
 
@@ -80,7 +88,7 @@ data <- rawdata_long %>%
 head(data)
 
 # Save the data as a CSV file, which can be opened in excel.
-write.csv(data, "data.csv", row.names = FALSE)
+write.csv(data, "data/data.csv", row.names = FALSE)
 ```
 
 ## **Visualisation**

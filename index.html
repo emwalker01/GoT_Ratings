@@ -364,10 +364,20 @@ display: none;
 </center>
 <div id="background-and-research-question" class="section level2">
 <h2><strong>Background and Research Question</strong></h2>
+<p><strong>“How have the ratings of Game of Thrones episodes evolved
+over time across different seasons?”</strong></p>
+<p>This research question will aim to explore trends in the data such as
+whether ratings increased or decreased over the course of the show, or
+whether there were any significant drops after key plot developments,
+for example.</p>
 </div>
 <div id="data" class="section level2">
 <h2><strong>Data</strong></h2>
-<p>Write something about where I got the data from.</p>
+<p>The raw data was obtained from the IMDB website which is publicly
+accessible via this link:</p>
+<p><a href="https://www.imdb.com/title/tt0944947/ratings/" class="uri">https://www.imdb.com/title/tt0944947/ratings/</a></p>
+<p>The data used in this analysis was extracted from the ‘Ratings by
+episode’ section.</p>
 <div id="load-packages" class="section level3">
 <h3>Load Packages</h3>
 <pre class="r"><code>library(tidyverse) #for data manipulation, visualization, and analysis
@@ -596,7 +606,7 @@ head(data)</code></pre>
 ## 5 1      Episode 5    9  
 ## 6 1      Episode 6    9.1</code></pre>
 <pre class="r"><code># Save the data as a CSV file, which can be opened in excel.
-write.csv(data, &quot;data.csv&quot;, row.names = FALSE)</code></pre>
+write.csv(data, &quot;data/data.csv&quot;, row.names = FALSE)</code></pre>
 </div>
 </div>
 <div id="visualisation" class="section level2">
