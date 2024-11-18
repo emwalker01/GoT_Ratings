@@ -1,8 +1,0 @@
-"0","library(grid)  # For rasterGrob"
-"0","library(gridExtra)  # To arrange the plot and images side by side"
-"0","# Preprocess your data"
-"0","data1 <- data %>%"
-"0","  mutate(EpisodeNumber = as.integer(str_replace(Episode, ""Episode "", """")))"
-"2","Error in data %>% mutate(EpisodeNumber = as.integer(str_replace(Episode,  : 
-  could not find function ""%>%""
-"
