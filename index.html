@@ -573,7 +573,7 @@ kable(rawdata, format = &quot;markdown&quot;)</code></pre>
 </table>
 <p>Write something here about why episode 11 is being excluded.
 i.e. episode 11 on IMDB is in the data but it was an unaired pilot
-episode.</p>
+episode so isnt necessary.</p>
 <pre class="r"><code># Reshape the data to long format for a more flexible structure for visualizing, analyzing, and modeling data. This is easier for ggplot2 to handle.
 rawdata_long &lt;- rawdata %&gt;%
   pivot_longer(cols = starts_with(&quot;Episode&quot;),  # Select columns that start with &quot;Episode&quot;

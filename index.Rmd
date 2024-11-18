@@ -63,7 +63,7 @@ rawdata$Season <- sub("s", "", rawdata$Season) #removing the 's' just to clean u
 kable(rawdata, format = "markdown")
 ```
 
-Write something here about why episode 11 is being excluded. i.e. episode 11 on IMDB is in the data but it was an unaired pilot episode.
+Write something here about why episode 11 is being excluded. i.e. episode 11 on IMDB is in the data but it was an unaired pilot episode so isnt necessary.
 
 ```{r cleaning}
 # Reshape the data to long format for a more flexible structure for visualizing, analyzing, and modeling data. This is easier for ggplot2 to handle.
