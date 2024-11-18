@@ -176,7 +176,12 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
     limits = c(4, 10),              # Set y-axis limits
     expand = c(0, 0)                # Remove extra padding
   ) + 
-  theme(legend.position = "right")  # Position the legend on the right
+  theme(legend.position = "right") +  # Position the legend on the right
+  guides(color = guide_legend(
+    keywidth = 2,  # Adjust the size of the legend key (box around the color circle)
+    keyheight = 2, # Adjust the size of the legend key (box around the color circle)
+    override.aes = list(size = 5)  # Increase the size of the color circles inside the legend
+  ))
 
 # Display the plot
 print(p1)
