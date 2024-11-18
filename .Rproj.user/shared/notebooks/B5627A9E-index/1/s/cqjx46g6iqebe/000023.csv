@@ -1,8 +1,0 @@
-"0","#rename the first column after automatic assignment of ""...1"""
-"0","colnames(rawdata) <- ifelse(colnames(rawdata) == ""...1"", ""Season"", colnames(rawdata))"
-"0",""
-"0","#rename the columns, excluding the first, empty column"
-"0","colnames(rawdata)[-1] <- c(""Episode 1"", ""Episode 2"", ""Episode 3"", ""Episode 4"", ""Episode 5"", ""Episode 6"", ""Episode 7"", ""Episode 8"", ""Episode 9"", ""Episode 10"", ""Episode 11"")"
-"0",""
-"0","#this is a sanity to check to make sure the column headers changed"
-"0","head(rawdata)"

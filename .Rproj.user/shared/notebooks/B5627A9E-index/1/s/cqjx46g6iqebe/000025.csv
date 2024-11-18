@@ -1,6 +1,0 @@
-"0",""
-"0","#change the values in the first column"
-"0","rawdata$Season <- sub(""s"", """", rawdata$Season) #removing the 's' just to clean up to view of the table."
-"0",""
-"0","#render the table with kable"
-"0","kable(rawdata, format = ""markdown"")"
