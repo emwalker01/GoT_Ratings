@@ -32,6 +32,7 @@ library(dplyr) #for data manipulation tasks
 library(ggimage) #to add images to the legend
 library(stringr) #
 library(jpeg) #to read jpeg files
+library(grid)
 ```
 
 ### Import the Data
@@ -160,7 +161,6 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 # Display the plot
 print(p1)
 ```
-
 
 
 
