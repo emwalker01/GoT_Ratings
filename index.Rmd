@@ -123,21 +123,41 @@ data1$Season <- factor(data1$Season,
                        levels = 1:8, 
                        labels = c("Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8"))
 
-#this is a sanity check to view the column change
-print(data1)
-
 # Assign custom colors to each line based on the season
 custom_colors <- c(
   "Season 1" = "#7f7f7f",   # Grey for Season 1, House Stark
   "Season 2" = "#ffc406",   # Yellow for Season 2, House Baratheon
-  "Season 3" = "darkgreen",   # Green for Season 3, House Tyrell
+  "Season 3" = "#006400",   # Green for Season 3, House Tyrell
   "Season 4" = "#ED7014",   # Orange for Season 4, House Martel
-  "Season 5" = "maroon",   # Maroon for Season 5, House Lannister
+  "Season 5" = "#B03060",   # Maroon for Season 5, House Lannister
   "Season 6" = "#023E8A",   # Blue for Season 6, House Arryn
   "Season 7" = "#000000",   # Black for Season 7, House Greyjoy
   "Season 8" = "#ff0000"    # Red for Season 8, House Targaryen
 )
 ```
+
+
+```{r house custom colors, echo=FALSE, results="asis"}
+# HTML and CSS for 4-column layout
+cat('<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">')
+
+# Loop through the seasons and create the layout
+for (i in 1:8) {
+  season_name <- paste("Season", i)
+  season_color <- custom_colors[season_name]
+  image_path <- paste("images/season", i, ".jpg", sep="")
+  
+  # Create HTML content with image and color description
+  cat('<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">')
+  cat('<img src="', image_path, '" style="width: 100%; max-width: 150px; height: auto;">')
+  cat('<p><strong>', season_name, '</strong>: ', season_color, '</p>')
+  cat('</div>')
+}
+
+# Close the container
+cat('</div>')
+```
+
 
 
 ```{r customised visualisation, echo=TRUE, message=FALSE, warning=FALSE}

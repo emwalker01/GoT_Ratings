@@ -646,33 +646,67 @@ data1$Season &lt;- factor(data1$Season,
                        levels = 1:8, 
                        labels = c(&quot;Season 1&quot;, &quot;Season 2&quot;, &quot;Season 3&quot;, &quot;Season 4&quot;, &quot;Season 5&quot;, &quot;Season 6&quot;, &quot;Season 7&quot;, &quot;Season 8&quot;))
 
-#this is a sanity check to view the column change
-print(data1)</code></pre>
-<pre><code>## # A tibble: 80 × 4
-##    Season   Episode    Rating EpisodeNumber
-##    &lt;fct&gt;    &lt;chr&gt;       &lt;dbl&gt;         &lt;int&gt;
-##  1 Season 1 Episode 1     8.9             1
-##  2 Season 1 Episode 2     8.6             2
-##  3 Season 1 Episode 3     8.5             3
-##  4 Season 1 Episode 4     8.6             4
-##  5 Season 1 Episode 5     9               5
-##  6 Season 1 Episode 6     9.1             6
-##  7 Season 1 Episode 7     9.1             7
-##  8 Season 1 Episode 8     8.9             8
-##  9 Season 1 Episode 9     9.6             9
-## 10 Season 1 Episode 10    9.4            10
-## # ℹ 70 more rows</code></pre>
-<pre class="r"><code># Assign custom colors to each line based on the season
+# Assign custom colors to each line based on the season
 custom_colors &lt;- c(
   &quot;Season 1&quot; = &quot;#7f7f7f&quot;,   # Grey for Season 1, House Stark
   &quot;Season 2&quot; = &quot;#ffc406&quot;,   # Yellow for Season 2, House Baratheon
-  &quot;Season 3&quot; = &quot;darkgreen&quot;,   # Green for Season 3, House Tyrell
+  &quot;Season 3&quot; = &quot;#006400&quot;,   # Green for Season 3, House Tyrell
   &quot;Season 4&quot; = &quot;#ED7014&quot;,   # Orange for Season 4, House Martel
-  &quot;Season 5&quot; = &quot;maroon&quot;,   # Maroon for Season 5, House Lannister
+  &quot;Season 5&quot; = &quot;#B03060&quot;,   # Maroon for Season 5, House Lannister
   &quot;Season 6&quot; = &quot;#023E8A&quot;,   # Blue for Season 6, House Arryn
   &quot;Season 7&quot; = &quot;#000000&quot;,   # Black for Season 7, House Greyjoy
   &quot;Season 8&quot; = &quot;#ff0000&quot;    # Red for Season 8, House Targaryen
 )</code></pre>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">
+<img role="img" src=" images/season1.jpg " style="width: 100%; max-width: 150px; height: auto;">
+<p>
+<strong> Season 1 </strong>: #7f7f7f
+</p>
+</div>
+<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">
+<img role="img" src=" images/season2.jpg " style="width: 100%; max-width: 150px; height: auto;">
+<p>
+<strong> Season 2 </strong>: #ffc406
+</p>
+</div>
+<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">
+<img role="img" src=" images/season3.jpg " style="width: 100%; max-width: 150px; height: auto;">
+<p>
+<strong> Season 3 </strong>: #006400
+</p>
+</div>
+<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">
+<img role="img" src=" images/season4.jpg " style="width: 100%; max-width: 150px; height: auto;">
+<p>
+<strong> Season 4 </strong>: #ED7014
+</p>
+</div>
+<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">
+<img role="img" src=" images/season5.jpg " style="width: 100%; max-width: 150px; height: auto;">
+<p>
+<strong> Season 5 </strong>: #B03060
+</p>
+</div>
+<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">
+<img role="img" src=" images/season6.jpg " style="width: 100%; max-width: 150px; height: auto;">
+<p>
+<strong> Season 6 </strong>: #023E8A
+</p>
+</div>
+<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">
+<img role="img" src=" images/season7.jpg " style="width: 100%; max-width: 150px; height: auto;">
+<p>
+<strong> Season 7 </strong>: #000000
+</p>
+</div>
+<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">
+<img role="img" src=" images/season8.jpg " style="width: 100%; max-width: 150px; height: auto;">
+<p>
+<strong> Season 8 </strong>: #ff0000
+</p>
+</div>
+</div>
 <pre class="r"><code># Create the plot with new customisations
 p1 &lt;- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) +  
   geom_line() +                        
