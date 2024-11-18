@@ -33,6 +33,7 @@ library(ggimage) #to add images to the legend
 library(stringr) #
 library(jpeg) #to read jpeg files
 library(grid)
+library(gganimate)
 ```
 
 ### Import the Data
@@ -168,6 +169,7 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
   labs(x = "Episode Number",            
        y = "Episode Rating",            
        color = "") +  # Label for the legend
+  ggtitle("Game of Thrones Episode Ratings Per Season") + # Add a title
   theme_minimal() +  # Clean, minimal theme
   scale_color_manual(values = custom_colors) +  # Apply custom colors for lines
   scale_x_continuous(breaks = seq(1, max(data1$EpisodeNumber), by = 1)) +  # Set x-axis breaks
