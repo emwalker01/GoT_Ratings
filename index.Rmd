@@ -30,9 +30,7 @@ library(readxl) #to read excel files in R
 library(knitr) #runs the R code and inserts the results back into the document
 library(dplyr) #for data manipulation tasks
 library(ggimage) #to add images to the legend
-library(stringr) #
 library(jpeg) #to read jpeg files
-library(grid)
 library(gganimate)
 ```
 
