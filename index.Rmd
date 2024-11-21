@@ -30,7 +30,7 @@ The data used in this analysis was extracted from the 'Ratings by episode' secti
 
 ### Load Packages
 
-```{r loadlib, echo=TRUE, warning=FALSE, message=FALSE}
+```{r loadlib, echo = TRUE, results = 'hide', warning = FALSE, message = FALSE}
 #Load packages with renv
 install.packages("renv")
 library(renv)

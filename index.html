@@ -380,7 +380,12 @@ accessible via this link:</p>
 episode’ section.</p>
 <div id="load-packages" class="section level3">
 <h3>Load Packages</h3>
-<pre class="r"><code>library(tidyverse) #for data manipulation, visualization, and analysis
+<pre class="r"><code>#Load packages with renv
+install.packages(&quot;renv&quot;)
+library(renv)
+renv::restore()
+
+library(tidyverse) #for data manipulation, visualization, and analysis
 library(here) #simplifies paths
 library(readxl) #to read excel files in R
 library(knitr) #runs the R code and inserts the results back into the document
