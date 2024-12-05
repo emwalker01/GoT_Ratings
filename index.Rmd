@@ -201,6 +201,17 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 # Display the plot
 print(p1)
 ```
+```{r animated plot, echo=TRUE, message=FALSE, warning=FALSE}
+
+anim <- p1 + 
+  geom_point() +
+  transition_manual(EpisodeNumber, cumulative = TRUE) +
+labs(
+  subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
+)
+
+print(anim)
+```
 
 
 
