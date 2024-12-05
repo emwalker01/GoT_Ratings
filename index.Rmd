@@ -78,7 +78,7 @@ rawdata$Season <- sub("s", "", rawdata$Season)
 kable(rawdata, format = "markdown")
 ```
 
-Write something here about why episode 11 is being excluded. i.e. episode 11 on IMDB is in the data but it was an unaired pilot episode so isnt necessary.
+The above table shows a much cleaner version of the data, however, it is not ready for visualisation yet. Before I take the data and plot it, first I am going to remove the final column containing 'Episode 11'. The reason for this is that this data is not required in the analysis as this is the unaired original pilot. Audiences never saw this episode and was simply an alternate to the official pilot episode that was released. Therefore, 'Episode 11' was excluded from the final dataset.
 
 ```{r cleaning}
 # Reshape the data to long format for a more flexible structure for visualizing, analyzing, and modeling data. This is easier for ggplot2 to handle.
