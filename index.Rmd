@@ -5,6 +5,7 @@ date: "2024-11-11"
 output:
   html_document:
     theme: 'darkly'  # Apply the darkly Bootstrap theme
+    highlight: 'tango'
     toc: true  # Add Table of Contents
     number_sections: true  # Number sections automatically
     toc_float:
@@ -40,18 +41,28 @@ The data used in this analysis was extracted from the 'Ratings by episode' secti
 I created an excel spreadsheet which perfectly replicated the grid shown on the IMDB page showing each episode rating, making the data accessible for wwrangling and visualisation.
 
 ## **Data Preparation**
+### Package Versions
+
+Library and Version |Purpose
+:-----------------  |:-----------------
+tidyverse_2.0.0     |for handling data
+here_1.0.1          |for easy file and directory referencing 
+readxl_1.4.3        |for reading excel files
+knitr_1.49          |for combining R code with text to create dynamic reports
+dplyr_1.1.4         |for data manipulation tasks
+jpeg_0.10.10        |for reaading jpeg files
+gganimate_1.0.9     |for creating animated plots
+
 ### Load Packages
 
 ```{r loadlib, echo = TRUE, results = 'hide', warning = FALSE, message = FALSE}
-
-library(tidyverse) #for data manipulation, visualization, and analysis
-library(here) #simplifies paths
-library(readxl) #to read excel files in R
-library(knitr) #runs the R code and inserts the results back into the document
-library(dplyr) #for data manipulation tasks
-library(ggimage) #to add images to the legend
-library(jpeg) #to read jpeg files
-library(gganimate) #to create an animated plot
+library(tidyverse)
+library(here)
+library(readxl)
+library(knitr)
+library(dplyr)
+library(jpeg)
+library(gganimate)
 ```
 
 ### Import the Data
@@ -68,9 +79,10 @@ R has automatically assigned any empty values in the table to now say "...1". Fi
 print(rawdata)
 ```
 
-My data has successfully imported, the next step is to wrangle the data to convert it into a form that can be easily visualised.
+The data has successfully imported, the next step is to wrangle the data to convert it into a form that can be easily visualised.
 
-### Wrangle the Data
+## **Data Wrangling**
+### Renaming the columns
 
 ```{r wrangle, echo=TRUE, warning=FALSE, message=FALSE}
 #rename the first column after automatic assignment of "...1"
@@ -92,6 +104,8 @@ kable(rawdata, format = "markdown")
 
 The above table shows a much cleaner version of the data, however, it is not ready for visualisation yet. Before I take the data and plot it, first I am going to remove the final column containing 'Episode 11'. The reason for this is that this data is not required in the analysis as this is the unaired original pilot. Audiences never saw this episode and was simply an alternate to the official pilot episode that was released. Therefore, 'Episode 11' was excluded from the final dataset.
 
+### Reshaping the data
+
 ```{r cleaning}
 # Reshape the data to long format for a more flexible structure for visualizing, analyzing, and modeling data. This is easier for ggplot2 to handle.
 rawdata_long <- rawdata %>%
@@ -110,7 +124,8 @@ head(data)
 write.csv(data, "data/data.csv", row.names = FALSE)
 ```
 
-## **Visualisation**
+## **Visualisations**
+### Basic Visualisation
 
 ```{r basic visualisation, echo=TRUE, warning=FALSE, message=FALSE}
 #Create a basic line plot with minimal customisation
@@ -129,6 +144,8 @@ p <- ggplot(data, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # C
 #view the plot as a sanity check to assess what direction to take the customisations.
 print(p)
 ```
+
+### Customisation
 
 Write something here about recoding the episode column to be able to change the scale
 
@@ -183,9 +200,7 @@ for (i in 1:8) {
 # Close the container
 cat('</div>')
 ```
-
-
-
+### Customised Visualisation
 
 ```{r customised visualisation, echo=TRUE, message=FALSE, warning=FALSE}
 # Create the plot with new customisations
@@ -215,6 +230,9 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 # Display the plot
 print(p1)
 ```
+## **Animated Visualisations**
+### Animated Visualisation 1
+
 ```{r animated plot, echo=TRUE, message=FALSE, warning=FALSE}
 anim <- p1 + 
   geom_point() +
@@ -223,8 +241,11 @@ anim <- p1 +
     subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
   )
 
-print(anim)
 
+```
+
+### Animated Visualisation 2
+```{r animated plot 2, echo=TRUE, message=FALSE, warning=FALSE}
 anim2 <- p1 + 
   geom_point() +
   transition_reveal(EpisodeNumber) +
@@ -232,11 +253,8 @@ anim2 <- p1 +
     subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
   )
 
-print(anim2)
+
 ```
-
-
-
 
 
 
