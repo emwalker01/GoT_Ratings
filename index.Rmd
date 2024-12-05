@@ -47,10 +47,16 @@ library(gganimate)
 ```{r import}
 #load data from excel file
 rawdata <- read_excel(here::here("raw_data", "raw_data.xlsx"))
+```
 
+R has automatically assigned any empty values in the table to now say "...1". First, I am going to print the data to see how it looks initially after importing.
+
+```{r}
 #this is a sanity check to inspect the data
 print(rawdata)
 ```
+
+My data has successfully imported, the next step is to wrangle the data to convert it into a form that can be easily visualised.
 
 ### Wrangle the Data
 
@@ -58,14 +64,15 @@ print(rawdata)
 #rename the first column after automatic assignment of "...1"
 colnames(rawdata) <- ifelse(colnames(rawdata) == "...1", "Season", colnames(rawdata))
 
-#rename the columns, excluding the first, empty column
+#rename the columns, excluding the first which I have just renamed to remain empty
 colnames(rawdata)[-1] <- c("Episode 1", "Episode 2", "Episode 3", "Episode 4", "Episode 5", "Episode 6", "Episode 7", "Episode 8", "Episode 9", "Episode 10", "Episode 11")
 
 #this is a sanity to check to make sure the column headers changed
-head(rawdata)
+head(rawdata, n = 1)
 
 #change the values in the first column
-rawdata$Season <- sub("s", "", rawdata$Season) #removing the 's' just to clean up to view of the table.
+#removing the 's' just to clean up to view of the table
+rawdata$Season <- sub("s", "", rawdata$Season) 
 
 #render the table with kable
 kable(rawdata, format = "markdown")

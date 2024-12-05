@@ -395,6 +395,9 @@ library(gganimate)</code></pre>
 rawdata &lt;- read_excel(here::here(&quot;raw_data&quot;, &quot;raw_data.xlsx&quot;))</code></pre>
 <pre><code>## New names:
 ## • `` -&gt; `...1`</code></pre>
+<p>R has automatically assigned any empty values in the table to now say
+“…1”. First, I am going to print the data to see how it looks initially
+after importing.</p>
 <pre class="r"><code>#this is a sanity check to inspect the data
 print(rawdata)</code></pre>
 <pre><code>## # A tibble: 8 × 12
@@ -408,30 +411,28 @@ print(rawdata)</code></pre>
 ## 6 s6      8.4   9.2   8.6   9     9.7   8.3   8.5   8.3   9.9   9.9  NA  
 ## 7 s7      8.5   8.8   9.1   9.7   8.7   9     9.4  NA    NA    NA    NA  
 ## 8 s8      7.6   7.9   7.5   5.5   5.9   4    NA    NA    NA    NA    NA</code></pre>
+<p>My data has successfully imported, the next step is to wrangle the
+data to convert it into a form that can be easily visualised.</p>
 </div>
 <div id="wrangle-the-data" class="section level3">
 <h3>Wrangle the Data</h3>
 <pre class="r"><code>#rename the first column after automatic assignment of &quot;...1&quot;
 colnames(rawdata) &lt;- ifelse(colnames(rawdata) == &quot;...1&quot;, &quot;Season&quot;, colnames(rawdata))
 
-#rename the columns, excluding the first, empty column
+#rename the columns, excluding the first which I have just renamed to remain empty
 colnames(rawdata)[-1] &lt;- c(&quot;Episode 1&quot;, &quot;Episode 2&quot;, &quot;Episode 3&quot;, &quot;Episode 4&quot;, &quot;Episode 5&quot;, &quot;Episode 6&quot;, &quot;Episode 7&quot;, &quot;Episode 8&quot;, &quot;Episode 9&quot;, &quot;Episode 10&quot;, &quot;Episode 11&quot;)
 
 #this is a sanity to check to make sure the column headers changed
-head(rawdata)</code></pre>
-<pre><code>## # A tibble: 6 × 12
+head(rawdata, n = 1)</code></pre>
+<pre><code>## # A tibble: 1 × 12
 ##   Season `Episode 1` `Episode 2` `Episode 3` `Episode 4` `Episode 5` `Episode 6`
 ##   &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
-## 1 s1             8.9         8.6         8.5         8.6         9           9.1
-## 2 s2             8.6         8.3         8.7         8.6         8.6         8.9
-## 3 s3             8.6         8.4         8.7         9.5         8.9         8.7
-## 4 s4             9           9.7         8.7         8.7         8.6         9.7
-## 5 s5             8.3         8.3         8.3         8.5         8.5         7.9
-## 6 s6             8.4         9.2         8.6         9           9.7         8.3
+## 1 s1             8.9         8.6         8.5         8.6           9         9.1
 ## # ℹ 5 more variables: `Episode 7` &lt;dbl&gt;, `Episode 8` &lt;dbl&gt;, `Episode 9` &lt;dbl&gt;,
 ## #   `Episode 10` &lt;dbl&gt;, `Episode 11` &lt;dbl&gt;</code></pre>
 <pre class="r"><code>#change the values in the first column
-rawdata$Season &lt;- sub(&quot;s&quot;, &quot;&quot;, rawdata$Season) #removing the &#39;s&#39; just to clean up to view of the table.
+#removing the &#39;s&#39; just to clean up to view of the table
+rawdata$Season &lt;- sub(&quot;s&quot;, &quot;&quot;, rawdata$Season) 
 
 #render the table with kable
 kable(rawdata, format = &quot;markdown&quot;)</code></pre>
