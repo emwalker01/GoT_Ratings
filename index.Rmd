@@ -2,7 +2,13 @@
 title: "PSY6422 Project"
 author: "Emma Walker"
 date: "2024-11-11"
-output: html_document
+output:
+  html_document:
+    theme: 'darkly'  # Apply the darkly Bootstrap theme
+    toc: true  # Add Table of Contents
+    number_sections: true  # Number sections automatically
+    toc_float:
+      collapsed: false  # Table of Contents is expanded by default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,7 +18,10 @@ knitr::opts_chunk$set(echo = TRUE)
 <center>
 ![](images/Logo_Game_of_thrones.png)
 
-# **Game of Thrones Ratings Per Episode Per Season**
+
+<p style="font-size: 36px; font-weight: bold; text-align: center;">
+  Game of Thrones Ratings Per Episode Per Season
+</p>
 
 </center>
 ## **Background and Research Question**
@@ -21,13 +30,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This research question will aim to explore trends in the data such as whether ratings increased or decreased over the course of the show, or whether there were any significant drops after key plot developments, for example.
 
-## **Data**
+## **Data Source**
 The raw data was obtained from the IMDB website which is publicly accessible via this link:
 
 https://www.imdb.com/title/tt0944947/ratings/
 
-The data used in this analysis was extracted from the 'Ratings by episode' section.
+The data used in this analysis was extracted from the 'Ratings by episode' section of the Game of Thrones page.
 
+I created an excel spreadsheet which perfectly replicated the grid shown on the IMDB page showing each episode rating, making the data accessible for wwrangling and visualisation.
+
+## **Data Preparation**
 ### Load Packages
 
 ```{r loadlib, echo = TRUE, results = 'hide', warning = FALSE, message = FALSE}
@@ -204,22 +216,21 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 print(p1)
 ```
 ```{r animated plot, echo=TRUE, message=FALSE, warning=FALSE}
-
 anim <- p1 + 
   geom_point() +
   transition_manual(EpisodeNumber, cumulative = TRUE) +
-labs(
-  subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
-)
+  labs(
+    subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
+  )
 
 print(anim)
 
 anim2 <- p1 + 
   geom_point() +
   transition_reveal(EpisodeNumber) +
-labs(
-  subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
-)
+  labs(
+    subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
+  )
 
 print(anim2)
 ```
