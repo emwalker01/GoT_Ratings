@@ -217,7 +217,7 @@ anim2 <- p1 +
   geom_point() +
   transition_reveal(EpisodeNumber) +
 labs(
-  subtitle = "Episode: {frame_along}"  # Add a dynamic subtitle that changes with each frame
+  subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
 )
 
 print(anim2)
