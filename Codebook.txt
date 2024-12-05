@@ -1,0 +1,5 @@
+PSY6422 Module Project titled "Game of Thrones Ratings Per Episode Per Season"
+
+The files in this project are:
+
+Got_Ratings >
