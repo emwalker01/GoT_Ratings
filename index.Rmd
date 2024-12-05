@@ -3,6 +3,14 @@ title: "PSY6422 Project"
 author: "Emma Walker"
 date: "2024-11-11"
 output: html_document
+header-includes:
+  - |
+    <style>
+      body {
+        font-family: "Georgia", serif;
+        font-size: 20px;  /* Font size set to 20px */
+      }
+    </style>
 ---
 
 ```{r setup, include=FALSE}
