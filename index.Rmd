@@ -148,10 +148,10 @@ print(p)
 
 ### Customisation
 
-Write something here about recoding the episode column to be able to change the scale
+The x axis has automated to appear in intervals of 2.5. This needs recoding so that it shows the numeric episode numbers. To do this, I need to 'mutate' the data to remove "Episode" from the string of numbers. This converts the remaining number (e.g., "1", "2") into an integer; creating a new column called 'EpisodeNumber'.
 
 ```{r scale}
-# Preprocess the Episode column to extract numeric episode numbers. It removes the "Episode " part of the string and converts the remaining number (e.g., "1", "2") into an integer; creating a new column 'EpisodeNumber'
+# Preprocess the Episode column
 data1 <- data %>%
   mutate(EpisodeNumber = as.integer(str_replace(Episode, "Episode ", "")))
 
@@ -159,7 +159,19 @@ data1 <- data %>%
 print(data1)
 ```
 
-can write something here about customising the colours
+Next, I wanted to add a more personal customisation to the colours on the visualisation. To do this, I assigned a family house sigil to each of the seasons based on major plot points:
+
+Season Number       |Major Plot Point
+:-----------------  |:-----------------
+Season 1            |Only time all the Starks are together & Death of Eddard Stark; House Stark
+Season 2            |Death of Renly Baratheon & Battle of Blackwater; House Baratheon
+Season 3            |Jaime Lannister loses his hand & The Red Wedding ;House Lannister
+Season 4            |Death of Oberyn Martell; House Martell
+Season 5            |Mae
+Season 6            |
+Season 7            |
+Season 8            |
+
 
 ```{r line colours}
 # Convert the numeric 'Season' column to a factor with appropriate labels
@@ -171,9 +183,9 @@ data1$Season <- factor(data1$Season,
 custom_colors <- c(
   "Season 1" = "#7f7f7f",   # Grey for Season 1, House Stark
   "Season 2" = "#ffc406",   # Yellow for Season 2, House Baratheon
-  "Season 3" = "#006400",   # Green for Season 3, House Tyrell
-  "Season 4" = "#ED7014",   # Orange for Season 4, House Martel
-  "Season 5" = "#B03060",   # Maroon for Season 5, House Lannister
+  "Season 3" = "#B03060",   # Maroon for Season 5, House Lannister
+  "Season 4" = "#ED7014",   # Orange for Season 4, House Martell
+  "Season 5" = "#006400",   # Green for Season 3, House Tyrell
   "Season 6" = "#023E8A",   # Blue for Season 6, House Arryn
   "Season 7" = "#000000",   # Black for Season 7, House Greyjoy
   "Season 8" = "#ff0000"    # Red for Season 8, House Targaryen
@@ -244,7 +256,7 @@ anim <- p1 +
     subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
   )
 
-print(anim)
+
 ```
 
 ### Animated Visualisation 2
@@ -256,7 +268,7 @@ anim2 <- p1 +
     subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
   )
 
-print(anim2)
+
 ```
 
 
