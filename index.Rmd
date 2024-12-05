@@ -30,11 +30,11 @@ The data used in this analysis was extracted from the 'Ratings by episode' secti
 
 ### Load Packages
 
+The project utilized the renv package to retain package versions, safeguarding it from potential updates to packages in the future.
+
+Package versions used in this project are listed within the file /renv.lock
+
 ```{r loadlib, echo = TRUE, results = 'hide', warning = FALSE, message = FALSE}
-#Load packages with renv
-install.packages("renv")
-library(renv)
-renv::restore()
 
 library(tidyverse) #for data manipulation, visualization, and analysis
 library(here) #simplifies paths
