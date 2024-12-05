@@ -39,7 +39,7 @@ library(knitr) #runs the R code and inserts the results back into the document
 library(dplyr) #for data manipulation tasks
 library(ggimage) #to add images to the legend
 library(jpeg) #to read jpeg files
-library(gganimate)
+library(gganimate) #to create an animated plot
 ```
 
 ### Import the Data
@@ -181,7 +181,8 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
   geom_point() +                       
   labs(x = "Episode Number",            
        y = "Episode Rating",            
-       color = "") +  # Label for the legend
+       color = "",                     # Label for the legend
+       caption = "Source: IMDB.com") +  # Add source text at the bottom
   ggtitle("Game of Thrones Episode Ratings Per Season") + # Add a title
   theme_minimal() +  # Clean, minimal theme
   scale_color_manual(values = custom_colors) +  # Apply custom colors for lines
