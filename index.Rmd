@@ -34,7 +34,27 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **"How have the ratings of Game of Thrones episodes evolved over time across different seasons?"**
 
-This research question will aim to explore trends in the data such as whether ratings increased or decreased over the course of the show, or whether there were any significant drops after key plot developments, for example.
+Game of Thrones is a globally renowned television series that aired for eight seasons, captivating millions of viewers with its complex narrative and unexpected twists. Throughout the show's run, the ratings for each episode varied, reflecting audience reactions to both character development and major plot events. The purpose of this analysis is to explore how the ratings evolved over time, particularly across the different seasons of the show. The goal is to understand whether there are significant trends, such as:
+
+➸ A consistent increase or decrease in ratings across seasons.
+
+➸ Sharp drops or rises in ratings following key plot developments (e.g., deaths of major characters or unexpected storylines).
+
+➸ Whether certain seasons or episodes stand out in terms of audience reception.
+
+Understanding these patterns can provide insights into how Game of Thrones engaged its audience throughout its run and how specific plot choices impacted viewer satisfaction.
+
+The purpose of the code is to process and analyse the ratings data for each episode of the show. This includes:
+
+➸ Cleaning and transforming the data for use in visualisation.
+
+➸ Plotting trends to visualise how ratings evolved from season to season and episode to episode.
+
+➸ Identifying anomalies or significant drops in ratings, which could correspond to specific events in the storyline, such as controversial plot twists or character deaths.
+
+➸ Comparing different seasons to understand if ratings improved or declined, and potentially correlate these changes with story arcs or audience reception.
+
+By answering this question, the analysis provides a quantitative look at the evolution of the show’s reception, offering insights that may reflect broader trends in viewer preferences and engagement with long-running TV series.
 
 ## **Data Source**
 The raw data was obtained from the IMDB website which is publicly accessible via this link:
@@ -43,7 +63,7 @@ https://www.imdb.com/title/tt0944947/ratings/
 
 The data used in this analysis was extracted from the 'Ratings by episode' section of the Game of Thrones page.
 
-I created an excel spreadsheet which perfectly replicated the grid shown on the IMDB page showing each episode rating, making the data accessible for wwrangling and visualisation.
+I created an excel spreadsheet which perfectly replicated the grid shown on the IMDB page showing each episode rating, making the data accessible for wrangling and visualisation.
 
 ## **Data Preparation**
 ### Package Versions
@@ -114,7 +134,7 @@ The above table shows a much cleaner version of the data, however, it is not rea
 ### Reshaping the data
 
 ```{r cleaning}
-# Reshape the data to long format for a more flexible structure for visualizing, analyzing, and modeling data. This is easier for ggplot2 to handle.
+# Reshape the data to long format for a more flexible structure for visualising, analysing, and modeling data. This is easier for ggplot2 to handle.
 rawdata_long <- rawdata %>%
   pivot_longer(cols = starts_with("Episode"),  # Select columns that start with "Episode"
                names_to = "Episode",           # Create a new column "Episode"
