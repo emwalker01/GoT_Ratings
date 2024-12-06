@@ -301,7 +301,7 @@ anim
 
 ### Animated Visualisation 2
 ```{r animated plot 2, echo=TRUE, message=FALSE, warning=FALSE}
-anim2 <- p1_font + 
+anim2 <- p1 + 
   geom_point() +
   transition_reveal(EpisodeNumber) +
   labs(
