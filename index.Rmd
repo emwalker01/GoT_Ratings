@@ -32,7 +32,9 @@ knitr::opts_chunk$set(echo = TRUE)
 </center>
 ## **Background and Research Question**
 
-**"How have the ratings of Game of Thrones episodes evolved over time across different seasons?"**
+<p style="font-size: 20px; font-weight: bold; text-align: center;">
+  "How have the ratings of Game of Thrones episodes evolved over time across different seasons?"
+</p>
 
 Game of Thrones is a globally renowned television series that aired for eight seasons, captivating millions of viewers with its complex narrative and unexpected twists. Throughout the show's run, the ratings for each episode varied, reflecting audience reactions to both character development and major plot events. The purpose of this analysis is to explore how the ratings evolved over time, particularly across the different seasons of the show. The goal is to understand whether there are significant trends, such as:
 
@@ -250,22 +252,23 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
   geom_point() +                       
   labs(x = "Episode Number",            
        y = "Episode Rating",            
-       color = "",                     # Label for the legend
-       caption = "Source: IMDB.com") +  # Add source text at the bottom
+       color = "",                                        # Label for the legend
+       caption = "Source: IMDB.com") +                    # Add source text at the bottom
   ggtitle("Game of Thrones Episode Ratings Per Season") + # Add a title
-  theme_minimal() +  # Clean, minimal theme
-  scale_color_manual(values = custom_colors) +  # Apply custom colors for lines
+  theme_minimal() +                                       # Clean, minimal theme
+  scale_color_manual(values = custom_colors) +            # Apply custom colors for lines
   scale_x_continuous(breaks = seq(1, max(data1$EpisodeNumber), by = 1)) +  # Set x-axis breaks
   scale_y_continuous(
-    breaks = seq(4, 10, by = 0.5),  # Set y-axis breaks
-    limits = c(4, 10),              # Set y-axis limits
-    expand = c(0, 0)                # Remove extra padding
+    breaks = seq(4, 10, by = 0.5),                        # Set y-axis breaks
+    limits = c(4, 10),                                    # Set y-axis limits
+    expand = c(0, 0)                                      # Remove extra padding
   ) + 
-  theme(legend.position = "right") +  # Position the legend on the right
+  theme(legend.position = "right",                        # Position the legend on the right
+        text=element_text(family = "serif")) +           # Add font
   guides(color = guide_legend(
-    keywidth = 2,  # Adjust the size of the legend key (box around the color circle)
-    keyheight = 2, # Adjust the size of the legend key (box around the color circle)
-    override.aes = list(size = 5)  # Increase the size of the color circles inside the legend
+    keywidth = 2,                           # Adjust the size of the legend key (box around the color circle)
+    keyheight = 2,                          # Adjust the size of the legend key (box around the color circle)
+    override.aes = list(size = 5)           # Increase the size of the color circles inside the legend
   ))
 
 # Display the plot
@@ -295,6 +298,12 @@ anim <- p1 +
 
 print(anim)
 ```
+
+I really like the animation of the above plot, however, I think it could be improved by making the animation much smoother. Rather than the lines on teh graph appearing at every point, I would like it to gradually move across the graph. This will look much more visually appealing and encourage human readability. At the moment, it is quite difficult to focus on the details of the plot and the information it is providing becasue of how jumpy it in in appearance.
+
+To change this, I needed to change the "transition_manual" command to "transition_reveal".
+
+Initially, the subtitle was thrown off as the command "subtitle = "Episode: {frame}"" follows every frame of the animation to provide the subtitle, therefore the plot was showing that there were 100 episodes as there is 100 frames to the animation. After lots of trial and error, I used the command "subtitle = "Episode: {frame_along}"" to ensure that the subtitle reflected the episode number on the x axis.
 
 ### Animated Visualisation 2
 ```{r animated plot 2, echo=TRUE, message=FALSE, warning=FALSE}
