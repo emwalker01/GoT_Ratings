@@ -130,7 +130,7 @@ data <- rawdata_long %>%
 head(data)
 
 # Save the data as a CSV file, which can be opened in excel.
-write.csv(data, "data/data.csv", row.names = FALSE)
+write.csv(data, "cleaned_data/data.csv", row.names = FALSE)
 ```
 
 ## **Visualisations**
@@ -223,13 +223,6 @@ for (i in 1:8) {
 # Close the container
 cat('</div>')
 ```
-## Font
-
-```{r font}
-font_add_google("Merriweather", "Merriweather", regular.wt = 400)
-showtext_auto()
-
-```
 
 
 ### Customised Visualisation
@@ -252,14 +245,7 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
     limits = c(4, 10),              # Set y-axis limits
     expand = c(0, 0)                # Remove extra padding
   ) + 
- theme(
-    legend.position = "right",  
-    text = element_text(family = "Merriweather"),  # Use Merriweather font
-    plot.title = element_text(family = "Merriweather", size = 16, face = "bold"),  
-    axis.title = element_text(family = "Merriweather", size = 12),  
-    axis.text = element_text(family = "Merriweather", size = 10),  
-    plot.caption = element_text(family = "Merriweather", size = 10)  
-  ) + 
+ theme(legend.position = "right") + 
   guides(color = guide_legend(
     keywidth = 2,  # Adjust the size of the legend key (box around the color circle)
     keyheight = 2, # Adjust the size of the legend key (box around the color circle)
@@ -271,9 +257,28 @@ print(p1)
 ```
 
 
+## Font
+
+```{r font}
+#load font
+font_add_google("Merriweather", "Merriweather", regular.wt = 400)
+showtext_auto()
+
+p1_font <- p1 +
+  theme(
+    plot.title = element_text(family = "Merriweather", size = 36, face = "bold"),  # Change title font
+    axis.title = element_text(family = "Merriweather", size = 26),  # Change axis title font
+    axis.text = element_text(family = "Merriweather", size = 20),   # Change axis text font
+    plot.caption = element_text(family = "Merriweather", size = 20)  # Change caption font
+  )
+
+print(p1_font)
+
+```
+
 ## **Interactive Visualisation**
 ```{r}
-interactive_plot <- ggplotly(p1)
+interactive_plot <- ggplotly(p1_font)
 
 interactive_plot
 
@@ -284,26 +289,26 @@ interactive_plot
 ### Animated Visualisation 1
 
 ```{r animated plot, echo=TRUE, message=FALSE, warning=FALSE}
-anim <- p1 + 
+anim <- p1_font + 
   geom_point() +
   transition_manual(EpisodeNumber, cumulative = TRUE) +
   labs(
     subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
   )
 
-print(anim)
+anim
 ```
 
 ### Animated Visualisation 2
 ```{r animated plot 2, echo=TRUE, message=FALSE, warning=FALSE}
-anim2 <- p1 + 
+anim2 <- p1_font + 
   geom_point() +
   transition_reveal(EpisodeNumber) +
   labs(
     subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
   )
 
-print(anim2)
+anim2
 ```
 
 
