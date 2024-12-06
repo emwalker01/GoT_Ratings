@@ -57,6 +57,7 @@ knitr_1.49          |for combining R code with text to create dynamic reports
 dplyr_1.1.4         |for data manipulation tasks
 jpeg_0.10.10        |for reading jpeg files
 gganimate_1.0.9     |for creating animated plots
+plotly_4.10.4       |for an interactive plot
 
 ### Load Packages
 
@@ -68,6 +69,7 @@ library(knitr)
 library(dplyr)
 library(jpeg)
 library(gganimate)
+library(plotly)
 ```
 
 ### Import the Data
@@ -249,6 +251,15 @@ print(p1)
 ```
 
 
+## **Interactive Visualisation**
+```{r}
+interactive_plot <- ggplotly(p1)
+
+interactive_plot
+
+```
+
+
 ## **Animated Visualisations**
 ### Animated Visualisation 1
 
@@ -274,8 +285,6 @@ anim2 <- p1 +
 
 print(anim2)
 ```
-
-
 
 
 
