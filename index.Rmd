@@ -78,7 +78,6 @@ dplyr_1.1.4         |for data manipulation tasks
 jpeg_0.10.10        |for reading jpeg files
 gganimate_1.0.9     |for creating animated plots
 plotly_4.10.4       |for an interactive plot
-showtext_0.9.7      |for changing font
 
 ### Load Packages
 
@@ -91,7 +90,6 @@ library(dplyr)
 library(jpeg)
 library(gganimate)
 library(plotly)
-library(showtext)
 ```
 
 ### Import the Data
@@ -242,11 +240,6 @@ for (i in 1:8) {
 cat('</div>')
 ```
 
-```{r font}
-font_add_google("Merriweather", "Merriweather", regular.wt = 400)
-showtext_auto()
-```
-
 
 ### Customised Visualisation
 
@@ -278,18 +271,6 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 # Display the plot
 print(p1)
 ```
-```{r p1 + font, echo=TRUE, message=FALSE, warning=FALSE}
-p1_font <- p1 +
-  theme(
-    text = element_text(family = "Merriweather"),  # Use Merriweather font
-    plot.title = element_text(family = "Merriweather", size = 16, face = "bold"),  
-    axis.title = element_text(family = "Merriweather", size = 12),  
-    axis.text = element_text(family = "Merriweather", size = 10),  
-    plot.caption = element_text(family = "Merriweather", size = 10)  
-  )
-
-p1_font
-```
 
 
 ## **Interactive Visualisation**
@@ -301,7 +282,31 @@ interactive_plot
 ```
 
 
+## **Animated Visualisations**
+### Animated Visualisation 1
 
+```{r animated plot, echo=TRUE, message=FALSE, warning=FALSE}
+anim <- p1 + 
+  geom_point() +
+  transition_manual(EpisodeNumber, cumulative = TRUE) +
+  labs(
+    subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
+  )
+
+print(anim)
+```
+
+### Animated Visualisation 2
+```{r animated plot 2, echo=TRUE, message=FALSE, warning=FALSE}
+anim2 <- p1 + 
+  geom_point() +
+  transition_reveal(EpisodeNumber) +
+  labs(
+    subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
+  )
+
+print(anim2)
+```
 
 
 
