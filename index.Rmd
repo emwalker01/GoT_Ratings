@@ -264,12 +264,12 @@ print(p1)
 font_add_google("Merriweather", "Merriweather", regular.wt = 400)
 showtext_auto()
 
+
 p1_font <- p1 +
+  
   theme(
-    plot.title = element_text(family = "Merriweather", size = 36, face = "bold"),  # Change title font
-    axis.title = element_text(family = "Merriweather", size = 26),  # Change axis title font
-    axis.text = element_text(family = "Merriweather", size = 20),   # Change axis text font
-    plot.caption = element_text(family = "Merriweather", size = 20)  # Change caption font
+    text = element_text(family = "Merriweather"),
+    plot.title = element_text(family = "Merriweather", face = "bold")  
   )
 
 print(p1_font)
