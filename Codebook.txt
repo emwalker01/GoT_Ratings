@@ -1,5 +1,131 @@
 PSY6422 Module Project titled "Game of Thrones Ratings Per Episode Per Season"
 
+This data analysis project aims to explore trends in episode ratings per season of the TV show "Game of Thrones".
+
+The raw data was obtained from the IMDB website which is publicly accessible via this link:
+
+https://www.imdb.com/title/tt0944947/ratings/
+
+-----------------------------------------------------------------------------------------------
+
 The files in this project are:
 
 Got_Ratings >
+  > raw_data
+    > raw_data.xlsx - The raw data obtained from IMDB.com compiled in an excel spreadsheet
+  
+  > cleaned_data
+    > data.csv - The cleaned, long format data that is now easier to plot
+    
+  > images
+    > Logo_Game_of_Thrones.png
+    > Season1.png
+    > Season2.png
+    > Season3.png
+    > Season4.png
+    > Season5.png
+    > Season6.png
+    > Season7.png
+    > Season8.png
+    
+  > figures
+    >
+    
+  > index.Rmd 
+    - The RMarkdown created for this project for knitting to html
+    
+  > index.html
+    - The html file generated for this project; the webpage
+    
+  > GoT_Ratings.Rproj
+    - The R project file for this complete project
+    
+-----------------------------------------------------------------------------------------------
+
+Variables
+
+  > Season
+    - The Game of Thrones season number
+    - Type = character
+  
+  > Episode
+    - The Game of Thrones episode number within each season
+    - Type = character
+  
+  > Rating
+    - The rating score for each episode, as per IMDB.com
+    - Type = numeric
+  
+-----------------------------------------------------------------------------------------------
+  
+Environment > Data
+
+  > rawdata
+    - data loaded from excel file 'raw_data.xlsx
+  
+  > rawdata_long
+    - rawdata converted into long format, better for plotting
+  
+  > data
+    - rawdata_long after excluding Episiode 11 from data, saved as data.csv in 'cleaned_data' folder
+  
+  > data1
+    - data after 'Episode' column has been processed to remove the string "Episode " from each entry, converting emaining part of the string into an integer. This created a new column called 'EpisodeNumber'
+    
+  > p
+    - first, basic plot
+  
+  > p1
+    - customised plot
+  
+  > interactive_plot
+    - interactive version of p1
+    
+  > anim
+    - first animated p1 plot, using transition_manual command
+  
+  > anim2
+    - second animated p1 plot, using transition_reveal command
+-----------------------------------------------------------------------------------------------
+
+Environment > Vaules
+
+  > custom_colours
+    - "Season 1" = "#7f7f7f",   # Grey for Season 1, House Stark
+      "Season 2" = "#ffc406",   # Yellow for Season 2, House Baratheon
+      "Season 3" = "#B03060",   # Maroon for Season 3, House Lannister
+      "Season 4" = "#ED7014",   # Orange for Season 4, House Martell
+      "Season 5" = "#006400",   # Green for Season 5, House Tyrell
+      "Season 6" = "#023E8A",   # Blue for Season 6, House Arryn
+      "Season 7" = "#000000",   # Black for Season 7, House Greyjoy
+      "Season 8" = "#ff0000"    # Red for Season 8, House Targaryen
+      
+  > i
+    - 8L, 8 seasons
+  
+  > season_name
+    - paste("Season", i)
+    - Season 1, Season 2, Season 3, Season 4, Season 5, Season 6, Season 7, Season 8
+    
+  > season_colour
+    - custom_colors[season_name]
+    
+  > image_path
+    - paste("images/season", i, ".jpg", sep="")
+    - to insert images
+
+-----------------------------------------------------------------------------------------------
+
+Session Info
+
+  R version 4.4.1 (2024-06-14 ucrt)
+  
+  Packages
+    - tidyverse_2.0.0
+    - here_1.0.1
+    - readxl_1.4.3 
+    - knitr_1.49
+    - dplyr_1.1.4
+    - jpeg_0.10.10
+    - gganimate_1.0.9
+    - plotly_4.10.4
