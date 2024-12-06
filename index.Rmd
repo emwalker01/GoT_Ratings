@@ -58,6 +58,7 @@ dplyr_1.1.4         |for data manipulation tasks
 jpeg_0.10.10        |for reading jpeg files
 gganimate_1.0.9     |for creating animated plots
 plotly_4.10.4       |for an interactive plot
+showtext_0.9.7      |for changing fonts
 
 ### Load Packages
 
@@ -70,6 +71,7 @@ library(dplyr)
 library(jpeg)
 library(gganimate)
 library(plotly)
+library(showtext)
 ```
 
 ### Import the Data
@@ -152,7 +154,7 @@ p <- ggplot(data, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # C
 print(p)
 ```
 
-### Customisation
+## **Customisation**
 
 The x axis has automated to appear in intervals of 2.5. This needs recoding so that it shows the numeric episode numbers. To do this, I need to 'mutate' the data to remove "Episode" from the string of numbers. This converts the remaining number (e.g., "1", "2") into an integer; creating a new column called 'EpisodeNumber'.
 
@@ -164,6 +166,8 @@ data1 <- data %>%
 # This is a sanity check to view the new column
 print(data1)
 ```
+
+## Colour
 
 Next, I wanted to add a more personal customisation to the colours on the visualisation. To do this, I assigned a family house sigil to each of the seasons based on major plot points:
 
@@ -219,6 +223,15 @@ for (i in 1:8) {
 # Close the container
 cat('</div>')
 ```
+## Font
+
+```{r font}
+font_add_google("Merriweather", "Merriweather", regular.wt = 400)
+showtext_auto()
+
+```
+
+
 ### Customised Visualisation
 
 ```{r customised visualisation, echo=TRUE, message=FALSE, warning=FALSE}
@@ -239,7 +252,14 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
     limits = c(4, 10),              # Set y-axis limits
     expand = c(0, 0)                # Remove extra padding
   ) + 
-  theme(legend.position = "right") +  # Position the legend on the right
+ theme(
+    legend.position = "right",  
+    text = element_text(family = "Merriweather"),  # Use Merriweather font
+    plot.title = element_text(family = "Merriweather", size = 16, face = "bold"),  
+    axis.title = element_text(family = "Merriweather", size = 12),  
+    axis.text = element_text(family = "Merriweather", size = 10),  
+    plot.caption = element_text(family = "Merriweather", size = 10)  
+  ) + 
   guides(color = guide_legend(
     keywidth = 2,  # Adjust the size of the legend key (box around the color circle)
     keyheight = 2, # Adjust the size of the legend key (box around the color circle)
