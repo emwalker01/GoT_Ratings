@@ -12,12 +12,15 @@ The files in this project are:
 
 Got_Ratings >
   > raw_data
+    - To store the raw data file
     > raw_data.xlsx - The raw data obtained from IMDB.com compiled in an excel spreadsheet
   
   > cleaned_data
+    - To store the cleaned version of the data, separate from the raw data
     > data.csv - The cleaned, long format data that is now easier to plot
     
   > images
+    - To store all images used in the html
     > Logo_Game_of_Thrones.png
     > Season1.png
     > Season2.png
@@ -29,6 +32,7 @@ Got_Ratings >
     > Season8.png
     
   > figures
+    - To store all plots produced in data analysis
     >
     
   > index.Rmd 
