@@ -1,7 +1,7 @@
 ---
 title: "PSY6422 Project"
-author: "Emma Walker"
-date: "2024-11-11"
+author:
+date:
 output:
   html_document:
     theme: 'darkly'  # Apply the darkly Bootstrap theme
