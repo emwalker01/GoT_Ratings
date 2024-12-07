@@ -344,7 +344,7 @@ anim2 <- p1 +
 anim2
 ```
 
-```{r save_animation, eval=TRUE, message=FALSE, warning=FALSE, cache=TRUE}
+```{r save_animation, message=FALSE, warning=FALSE}
 #Save the plot to the 'figures' folder
 anim_save(here("figures" , "animated_plot.gif"), anim2, renderer = gifski_renderer())
 ```
