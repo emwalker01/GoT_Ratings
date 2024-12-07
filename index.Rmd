@@ -77,7 +77,7 @@ here_1.0.1          |for easy file and directory referencing
 readxl_1.4.3        |for reading excel files
 knitr_1.49          |for combining R code with text to create dynamic reports
 dplyr_1.1.4         |for data manipulation tasks
-jpeg_0.10.10        |for reading jpeg files
+jpeg_0.1.10         |for reading jpeg files
 gganimate_1.0.9     |for creating animated plots
 plotly_4.10.4       |for an interactive plot
 
@@ -248,7 +248,7 @@ cat('</div>')
 ```{r customised visualisation, echo=TRUE, message=FALSE, warning=FALSE}
 # Create the plot with new customisations
 p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) +  
-  geom_line() +                        
+  geom_line(size = 0.8) +                        
   geom_point() +                       
   labs(x = "Episode Number",            
        y = "Episode Rating",            
@@ -264,7 +264,10 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
     expand = c(0, 0)                                      # Remove extra padding
   ) + 
   theme(legend.position = "right",                        # Position the legend on the right
-        text=element_text(family = "serif")) +           # Add font
+        text = element_text(family = "serif"),            # Add font
+        plot.title = element_text(size = 20, face = "bold"), # Adjust title size and style
+        axis.line.x = element_line(color = "black", size = 1),  # Add border to the x-axis
+        axis.line.y = element_line(color = "black", size = 1)) +  # Add border to the y-axis
   guides(color = guide_legend(
     keywidth = 2,                           # Adjust the size of the legend key (box around the color circle)
     keyheight = 2,                          # Adjust the size of the legend key (box around the color circle)
@@ -275,10 +278,15 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 print(p1)
 ```
 
+```{r p2, include=FALSE}
+p2 <- p1 +  
+  geom_line()       # removes the line thickness to make the interactive plot more visually appealing
+```
+
 
 ## **Interactive Visualisation**
-```{r}
-interactive_plot <- ggplotly(p1)
+```{r interactive}
+interactive_plot <- ggplotly(p2)
 
 interactive_plot
 
@@ -296,7 +304,7 @@ anim <- p1 +
     subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
   )
 
-print(anim)
+anim
 ```
 
 I really like the animation of the above plot, however, I think it could be improved by making the animation much smoother. Rather than the lines on teh graph appearing at every point, I would like it to gradually move across the graph. This will look much more visually appealing and encourage human readability. At the moment, it is quite difficult to focus on the details of the plot and the information it is providing becasue of how jumpy it in in appearance.
@@ -314,7 +322,7 @@ anim2 <- p1 +
     subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
   )
 
-print(anim2)
+anim2
 ```
 
 
