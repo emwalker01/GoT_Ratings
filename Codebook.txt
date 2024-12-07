@@ -81,15 +81,19 @@ Environment > Data
   
   > p1
     - customised plot
+    
+  >p2
+    - p1 + thinner plot lines
   
   > interactive_plot
-    - interactive version of p1
+    - interactive version of p2
     
   > anim
     - first animated p1 plot, using transition_manual command
   
   > anim2
     - second animated p1 plot, using transition_reveal command
+    
 -----------------------------------------------------------------------------------------------
 
 Environment > Vaules

@@ -138,9 +138,9 @@ The above table shows a much cleaner version of the data, however, it is not rea
 ```{r cleaning}
 # Reshape the data to long format for a more flexible structure for visualising, analysing, and modeling data. This is easier for ggplot2 to handle.
 rawdata_long <- rawdata %>%
-  pivot_longer(cols = starts_with("Episode"),  # Select columns that start with "Episode"
-               names_to = "Episode",           # Create a new column "Episode"
-               values_to = "Rating")          # Create a new column "Rating"
+  pivot_longer(cols = starts_with("Episode"),   # Select columns that start with "Episode"
+               names_to = "Episode",            # Create a new column "Episode"
+               values_to = "Rating")            # Create a new column "Rating"
 
 # Exclude Episode 11 from the data
 data <- rawdata_long %>%
@@ -156,19 +156,21 @@ write.csv(data, "cleaned_data/data.csv", row.names = FALSE)
 ## **Visualisations**
 ### Basic Visualisation
 
+First, I made a basic plot using the cleaned data. This was to get to grips with the coding process and understand different aspects of the code. Additionally, it gave me insight into which direction to take the plot. For example, what colours should teh plot lines be? Does the text need changing? What further additons would benefit the visualisation?
+
 ```{r basic visualisation, echo=TRUE, warning=FALSE, message=FALSE}
 #Create a basic line plot with minimal customisation
 p <- ggplot(data, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # Convert episode to numeric
                          y = Rating, 
                          color = factor(Season))) +  # Use Season for different lines
-  geom_line() +                        # Draw lines
-  geom_point() +                       # Add points for each episode
-  labs(x = "Episode Number",            # Label for x-axis
-       y = "Episode Rating",            # Label for y-axis
-       color = "Season Number") +       # Label for the legend
-  theme_minimal() +                    # Use a minimal theme for a clean look
-  scale_color_viridis_d() +             # Add color scale for different lines
-  theme(legend.position = "right")      # Place the legend at the right
+  geom_line() +                          # Draw lines
+  geom_point() +                         # Add points for each episode
+  labs(x = "Episode Number",             # Label for x-axis
+       y = "Episode Rating",             # Label for y-axis
+       color = "Season Number") +        # Label for the legend
+  theme_minimal() +                      # Use a minimal theme for a clean look
+  scale_color_viridis_d() +              # Add color scale for different lines
+  theme(legend.position = "right")       # Place the legend at the right
 
 #view the plot as a sanity check to assess what direction to take the customisations.
 print(p)
@@ -231,7 +233,7 @@ for (i in 1:8) {
   season_color <- custom_colors[season_name]
   image_path <- paste("images/season", i, ".jpg", sep="")
   
-  # Create HTML content with image and color description
+# Create HTML content with image and color description
   cat('<div style="flex: 0 0 23%; margin-bottom: 20px; text-align: center;">')
   cat('<img src="', image_path, '" style="width: 100%; max-width: 150px; height: auto;">')
   cat('<p><strong>', season_name, '</strong>: ', season_color, '</p>')
@@ -241,7 +243,6 @@ for (i in 1:8) {
 # Close the container
 cat('</div>')
 ```
-
 
 ### Customised Visualisation
 
@@ -257,20 +258,21 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
   ggtitle("Game of Thrones Episode Ratings Per Season") + # Add a title
   theme_minimal() +                                       # Clean, minimal theme
   scale_color_manual(values = custom_colors) +            # Apply custom colors for lines
-  scale_x_continuous(breaks = seq(1, max(data1$EpisodeNumber), by = 1)) +  # Set x-axis breaks
+  scale_x_continuous(
+    breaks = seq(1, max(data1$EpisodeNumber), by = 1)) +  # Set x-axis breaks
   scale_y_continuous(
     breaks = seq(4, 10, by = 0.5),                        # Set y-axis breaks
     limits = c(4, 10),                                    # Set y-axis limits
     expand = c(0, 0)                                      # Remove extra padding
   ) + 
   theme(legend.position = "right",                        # Position the legend on the right
-        text = element_text(family = "serif"),            # Add font
-        plot.title = element_text(size = 20, face = "bold"), # Adjust title size and style
-        axis.line.x = element_line(color = "black", size = 1),  # Add border to the x-axis
+        text = element_text(family = "serif"),            # Add font serif
+        plot.title = element_text(size = 20, face = "bold"),      # Adjust title size and style
+        axis.line.x = element_line(color = "black", size = 1),    # Add border to the x-axis
         axis.line.y = element_line(color = "black", size = 1)) +  # Add border to the y-axis
   guides(color = guide_legend(
-    keywidth = 2,                           # Adjust the size of the legend key (box around the color circle)
-    keyheight = 2,                          # Adjust the size of the legend key (box around the color circle)
+    keywidth = 2,                           # Adjust the size of the legend key
+    keyheight = 2,                          # Adjust the size of the legend key
     override.aes = list(size = 5)           # Increase the size of the color circles inside the legend
   ))
 
@@ -278,23 +280,27 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 print(p1)
 ```
 
-```{r p2, include=FALSE}
+```{r p2, include=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 p2 <- p1 +  
   geom_line()       # removes the line thickness to make the interactive plot more visually appealing
 ```
 
 
 ## **Interactive Visualisation**
-```{r interactive}
-interactive_plot <- ggplotly(p2)
+
+To further build on the plot, I incorporated an interactive aspect that allows viewers to select different seasons to see them individually, select multiple to compare, or see all collectively. Additionally, hovering over plot points provides insight into the Season, episode number, and its IMDB rating. This plot allows for individual analysis of plot points and direct comparison.
+
+```{r interactive, echo=TRUE, message=FALSE, warning=FALSE}
+interactive_plot <- ggplotly(p2)   # Adds interactive aspect to plot
 
 interactive_plot
-
 ```
 
 
 ## **Animated Visualisations**
 ### Animated Visualisation 1
+
+An alternative to the interactive plot is an animated plot. I incorporated an animation to my plot so that the episode points were revealed gradually, making the visualisation more engaging and visually appealing. Specifically, the major difference between Season 8 ratings compared to the rest is quite pleasing to see being steadily revealed. 
 
 ```{r animated plot, echo=TRUE, message=FALSE, warning=FALSE}
 anim <- p1 + 
@@ -307,7 +313,7 @@ anim <- p1 +
 anim
 ```
 
-I really like the animation of the above plot, however, I think it could be improved by making the animation much smoother. Rather than the lines on teh graph appearing at every point, I would like it to gradually move across the graph. This will look much more visually appealing and encourage human readability. At the moment, it is quite difficult to focus on the details of the plot and the information it is providing becasue of how jumpy it in in appearance.
+I really like the animation of the above plot, however, I think it could be improved by making the animation much smoother. Rather than the lines on the graph appearing at every point, I would like it to gradually move across the graph. This will look much more visually appealing and encourage human readability. At the moment, it is quite difficult to focus on the details of the plot and the information it is providing because of how jumpy it in in appearance.
 
 To change this, I needed to change the "transition_manual" command to "transition_reveal".
 
@@ -326,5 +332,29 @@ anim2
 ```
 
 
+## **Conclusion**
+### Insights and Interpretations
+
+<p style="font-size: 20px; font-weight: bold; text-align: center;">
+  "How have the ratings of Game of Thrones episodes evolved over time across different seasons?"
+</p>
+
+The ratings for Game of Thrones episodes in seasons 1 to 7 generally follow a similar pattern, with most seasons showing steady ratings throughout, reflecting consistent viewer engagement and satisfaction. However, season 5 stands out as an anomaly, with a marked variation in its ratings. The season starts with relatively low ratings, it hits a noticeable low point in the middle, and then sharply rises towards a peak as the season progresses. This represents a possible influence of key plot developments or pivotal episodes. In stark contrast, season 8, the final season, is the lowest rated overall, with a steep decline in viewer satisfaction. This may be attributed to the controversial handling of the series' conclusion. This sharp drop represents the general reception of the last season, where many fans expressed dissatisfaction with the resolution of key storylines and character arcs.
+
+Generally, It seems that highly rated episodes of Game of Thrones are often linked to major plot events, particularly the deaths of significant characters and dramatic battles. For example, the three highest rated episodes include Season 3, Episode 9, titled "The Rains of Castamere" which included the plotline commonly referred to as "The Red Wedding". It is one of the most highly rated episodes, largely due to its shocking and brutal mass slaughter of key characters. Similarly, Season 6, Episodes 9 and 10 are titled "Battle of the Bastards" and "The Winds of Winter", respectively. "Battle of the Bastards" is praised for its epic combat and strategic depth, while "The Winds of Winter" delivers a shocking and dramatic conclusion to several major storylines. These pivotal episodes often evoke strong emotional reactions from viewers, contributing to higher ratings as they deliver unexpected twists and intense, memorable moments that become defining features of the series.
+
+### Evaluation
+
+This animation successfully conveys the complex relationship between Game of Thrones episode ratings and the progression of its seasons. The use of animation helps to visualise the change in public perception over time, giving the viewer a dynamic understanding of the series’ reception. Additionally, the animated plot allows for the dramatic reveal of drastic changes in the data, specifically, it is quite visually engaging to watch the poorly rated season 8 being revealed against the other season ratings. However, it should be noted that while the ratings reflect general enjoyment, they may not fully capture the nuances of audience reactions. The animation itself does not include critical review scores or contextual factors, like episode descriptions or key plot points.
+
+Moreover, the graph relies solely on IMDB ratings, which, while representative, might not capture the full spectrum of viewer experiences. This represents a possible bias within the data as it is solely based on IMDB ratings, which represent the opinions of a specific group of viewers- those who are motivated to rate the show. To improve on this analysis, the inclusion of other sources, such as audience surveys or social media analysis, could provide additional insights.
+
+### Where Next?
+
+Moving forward, a deeper dive into the factors driving the fluctuating ratings could be explored. For instance, examining the ratings in relation to key plot events or character arcs (e.g., the Battle of the Bastards or the final episode) would provide more detailed insights into what specifically influenced viewers' satisfaction.
+
+I particularly think the animated aspect works for this plot kind, but it may be beneficial to add an interactive aspect to be able to hover over episode points to reveal a plot synopsis and IMDB rating. The combination of the two may provide beneficial insights.
+
+An additional follow-up could be in relation to critic ratings against viewer ratings. For example, it may be insightful to investigate the comparison of Game of Thrones IMDB ratings with critical reviews (e.g., from Rotten Tomatoes, Metacritic, or TV critics), social media reactions (e.g., Twitter or Reddit discussions), and fan sentiment over time. It could explore discrepancy between what critics and fans thought of certain episodes, especially the controversial final seasons. This extension would explore whether public opinion diverges from expert analysis.
 
 
