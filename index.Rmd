@@ -80,6 +80,7 @@ dplyr_1.1.4         |for data manipulation tasks
 jpeg_0.1.10         |for reading jpeg files
 gganimate_1.0.9     |for creating animated plots
 plotly_4.10.4       |for an interactive plot
+gifski_1.32.0.1     |for saving gif files
 
 ### Load Packages
 
@@ -92,6 +93,7 @@ library(dplyr)
 library(jpeg)
 library(gganimate)
 library(plotly)
+library(gifski)
 ```
 
 ### Import the Data
@@ -272,7 +274,7 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
         text = element_text(family = "serif"),            # Add font serif
         plot.title = element_text(size = 20, face = "bold"),      # Adjust title size and style
         axis.line.x = element_line(color = "black", size = 1),    # Add border to the x-axis
-        axis.line.y = element_line(color = "black", size = 1),     # Add border to the y-axis
+        axis.line.y = element_line(color = "black", size = 1),    # Add border to the y-axis
         plot.background = element_rect(fill = "white"),           # Set plot background to white
         panel.background = element_rect(fill = "white")           # Set panel background to white
   ) +
@@ -340,15 +342,11 @@ anim2 <- p1 +
 
 #display the plot
 anim2
+```
 
+```{r save_animation, eval=TRUE, message=FALSE, warning=FALSE, cache=TRUE}
 #Save the plot to the 'figures' folder
-anim_save(
-    here("figures", "animated_plot.gif"),
-    animation = anim2,
-    width = 600,  # Width of the output in inches
-    height = 480,  # Height of the output in inches
-    dpi = 300    # Resolution (dots per inch) to control image quality
-)
+anim_save(here("figures" , "animated_plot.gif"), anim2, renderer = gifski_renderer())
 ```
 
 
