@@ -174,6 +174,9 @@ p <- ggplot(data, aes(x = as.integer(str_replace(Episode, "Episode ", "")),  # C
 
 #view the plot as a sanity check to assess what direction to take the customisations.
 print(p)
+
+#Save the plot to the 'figures' folder
+ggsave(here("figures", "basic_visualisation.png"))
 ```
 
 ### Customisation
@@ -269,8 +272,11 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
         text = element_text(family = "serif"),            # Add font serif
         plot.title = element_text(size = 20, face = "bold"),      # Adjust title size and style
         axis.line.x = element_line(color = "black", size = 1),    # Add border to the x-axis
-        axis.line.y = element_line(color = "black", size = 1)) +  # Add border to the y-axis
-  guides(color = guide_legend(
+        axis.line.y = element_line(color = "black", size = 1),     # Add border to the y-axis
+        plot.background = element_rect(fill = "white"),           # Set plot background to white
+        panel.background = element_rect(fill = "white")           # Set panel background to white
+  ) +
+    guides(color = guide_legend(
     keywidth = 2,                           # Adjust the size of the legend key
     keyheight = 2,                          # Adjust the size of the legend key
     override.aes = list(size = 5)           # Increase the size of the color circles inside the legend
@@ -278,6 +284,9 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 
 # Display the plot
 print(p1)
+
+#Save the plot to the 'figures' folder
+ggsave(here("figures", "visualisation.png"))
 ```
 
 ```{r p2, include=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
@@ -310,6 +319,7 @@ anim <- p1 +
     subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
   )
 
+#display the plot
 anim
 ```
 
@@ -328,7 +338,17 @@ anim2 <- p1 +
     subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
   )
 
+#display the plot
 anim2
+
+#Save the plot to the 'figures' folder
+anim_save(
+    here("figures", "animated_plot.gif"),
+    animation = anim2,
+    width = 600,  # Width of the output in inches
+    height = 480,  # Height of the output in inches
+    dpi = 300    # Resolution (dots per inch) to control image quality
+)
 ```
 
 
