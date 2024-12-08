@@ -351,8 +351,10 @@ anim2
 ```
 
 ```{r save animation, message=FALSE, warning=FALSE}
-#Save the plot to the 'figures' folder
-anim_save(here("figures" , "animated_plot.gif"), anim2, renderer = gifski_renderer())
+# Only save the animation if knitting to HTML, not PDF (PDF are static and animations are therefore not compatible)
+if (knitr::is_html_output()) {
+  anim_save(here("figures", "animated_plot.gif"), anim2, renderer = gifski_renderer())
+}
 ```
 
 
