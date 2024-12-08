@@ -137,3 +137,4 @@ Session Info
     - jpeg_0.1.10
     - gganimate_1.0.9
     - plotly_4.10.4
+    - gifski_1.32.0.1
