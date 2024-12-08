@@ -233,7 +233,7 @@ custom_colors <- c(
 ```
 
 
-```{r house custom colors, echo=FALSE, results="asis"}
+```{r house custom colors, echo=FALSE, results="asis", , eval=knitr::is_html_output()}
 # HTML and CSS for 4-column layout
 cat('<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">')
 
