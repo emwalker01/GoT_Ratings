@@ -1,10 +1,9 @@
-# PSY6422 Project
-Project for 'Data Analysis and Visualisation' module that analyses Game of Thrones Ratings per episode per season.
+# PSY6422 Project - Game of Thrones Episode Ratings Per Season
+Thank you for checking out my github page!
 
-Thanks for checking out my github page! 
+This is my project for the 'Data Analysis and Visualisation' module of my Master's degree. The project explores episode ratings throughout the seasons of the globally renowned television series Game of Thrones. The aim of the analysis is to investigate trends and anomalies in the episode ratings and to understand how the episode ratings have evolved across the seasons.
 
-This project was created to explore trends within Game of Thrones episode ratings. It aims to look at such as whether ratings increased or decreased over the course of the show, or whether there were any significant drops after key plot developments, for example.
+The purpose of this code was to learn basic data analysis techniques and to develop my coding abilities.
 
-If you would like to see this project, check the webpage (the link is available through this repo).
-If you would like to take this analysis forward, the data files and code used for this project are also available in this repo
-
+If you would like to see this project, the link to the webpage is available through this repo.
+Additionally, if you would like to take this project forward, the data files and code used for this project are also available.
