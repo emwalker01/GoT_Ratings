@@ -1,17 +1,21 @@
 ---
 title: "PSY6422 Project"
-author:
-date:
+author: "reg-240222240"
+date: "08/12/24"
 output:
   html_document:
-    self_contained: true      # Doesn't create new html files
-    theme: 'darkly'           # Apply the darkly Bootstrap theme
-    highlight: 'tango'        # Apply tango theme
-    code_folding: 'show'
-    toc: true                 # Add Table of Contents
-    number_sections: true     # Number sections automatically
+    self_contained: true
+    theme: darkly
+    highlight: tango
+    code_folding: show
+    toc: true
+    number_sections: true
     toc_float:
-      collapsed: false        # Table of Contents is expanded by default
+      collapsed: false
+  pdf_document:
+    toc: true
+    latex_engine: xelatex
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -326,6 +330,7 @@ anim <- p1 +
   )
 
 #display the plot, this is a sanity check to see how the animation looks
+#I have chosen to leave this in for the PDF output as it has only 10 frames and represents the key frames of the animations output with the relevant subtitle
 anim
 ```
 
@@ -343,12 +348,16 @@ anim2 <- p1 +
   labs(
     subtitle = "Episode: {frame_along}"  # Ensure the subtitle is in line with the x axis
   )
+```
 
+```{r display, message=FALSE, warning=FALSE, eval=knitr::is_html_output()}
+#this is a new chunk as the plot has 100 frames, therefore adds 100 images to a pdf document
 #display the plot
 anim2
 ```
 
-```{r save animation, message=FALSE, warning=FALSE}
+
+```{r save animation, message=FALSE, warning=FALSE, eval=knitr::is_html_output()}
 #Save the plot to the 'figures' folder
 anim_save(here("figures" , "animated_plot.gif"), anim2, renderer = gifski_renderer())
 ```
