@@ -1,16 +1,19 @@
 ---
 title: "PSY6422 Project"
-author:
-date:
+author: "null"
+date: "null"
 output:
   html_document:
-    theme: 'darkly'  # Apply the darkly Bootstrap theme
-    highlight: 'tango'
-    code_folding: 'show'
-    toc: true  # Add Table of Contents
-    number_sections: true  # Number sections automatically
+    self_contained: true
+    theme: darkly
+    highlight: tango
+    code_folding: show
+    toc: true
+    number_sections: true
     toc_float:
-      collapsed: false  # Table of Contents is expanded by default
+      collapsed: false
+  pdf_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
