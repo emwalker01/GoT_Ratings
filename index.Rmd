@@ -1,19 +1,17 @@
 ---
 title: "PSY6422 Project"
-author: "null"
-date: "null"
+author:
+date:
 output:
   html_document:
-    self_contained: true
-    theme: darkly
-    highlight: tango
-    code_folding: show
-    toc: true
-    number_sections: true
+    self_contained: true      # Doesn't create new html files
+    theme: 'darkly'           # Apply the darkly Bootstrap theme
+    highlight: 'tango'        # Apply tango theme
+    code_folding: 'show'
+    toc: true                 # Add Table of Contents
+    number_sections: true     # Number sections automatically
     toc_float:
-      collapsed: false
-  pdf_document:
-    toc: true
+      collapsed: false        # Table of Contents is expanded by default
 ---
 
 ```{r setup, include=FALSE}
@@ -351,10 +349,8 @@ anim2
 ```
 
 ```{r save animation, message=FALSE, warning=FALSE}
-# Only save the animation if knitting to HTML, not PDF (PDF are static and animations are therefore not compatible)
-if (knitr::is_html_output()) {
-  anim_save(here("figures", "animated_plot.gif"), anim2, renderer = gifski_renderer())
-}
+#Save the plot to the 'figures' folder
+anim_save(here("figures" , "animated_plot.gif"), anim2, renderer = gifski_renderer())
 ```
 
 
