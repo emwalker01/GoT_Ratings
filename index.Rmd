@@ -286,10 +286,13 @@ p1 <- ggplot(data1, aes(x = EpisodeNumber, y = Rating, color = factor(Season))) 
 
 # Display the plot
 print(p1)
+```
 
+```{r save plot, message=FALSE, warning=FALSE}
 #Save the plot to the 'figures' folder
 ggsave(here("figures", "visualisation.png"))
 ```
+
 
 ```{r p2, include=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 p2 <- p1 +  
@@ -321,7 +324,7 @@ anim <- p1 +
     subtitle = "Episode: {frame}"  # Add a dynamic subtitle that changes with each frame
   )
 
-#display the plot
+#display the plot, this is a sanity check to see how the animation looks
 anim
 ```
 
@@ -344,7 +347,7 @@ anim2 <- p1 +
 anim2
 ```
 
-```{r save_animation, message=FALSE, warning=FALSE}
+```{r save animation, message=FALSE, warning=FALSE}
 #Save the plot to the 'figures' folder
 anim_save(here("figures" , "animated_plot.gif"), anim2, renderer = gifski_renderer())
 ```
@@ -374,5 +377,4 @@ Moving forward, a deeper dive into the factors driving the fluctuating ratings c
 I particularly think the animated aspect works for this plot kind, but it may be beneficial to add an interactive aspect to be able to hover over episode points to reveal a plot synopsis and IMDB rating. The combination of the two may provide beneficial insights.
 
 An additional follow-up could be in relation to critic ratings against viewer ratings. For example, it may be insightful to investigate the comparison of Game of Thrones IMDB ratings with critical reviews (e.g., from Rotten Tomatoes, Metacritic, or TV critics), social media reactions (e.g., Twitter or Reddit discussions), and fan sentiment over time. It could explore discrepancy between what critics and fans thought of certain episodes, especially the controversial final seasons. This extension would explore whether public opinion diverges from expert analysis.
-
 
