@@ -33,7 +33,6 @@ Got_Ratings >
     
   > figures
     - To store all plots produced in data analysis
-    >
     
   > index.Rmd 
     - The RMarkdown created for this project for knitting to html
@@ -82,7 +81,7 @@ Environment > Data
   > p1
     - customised plot
     
-  >p2
+  > p2
     - p1 + thinner plot lines
   
   > interactive_plot
